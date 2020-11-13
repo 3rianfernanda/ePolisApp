@@ -1,0 +1,155 @@
+﻿@model Epolis.Models.Tbroker
+
+@{
+    ViewData["Title"] = "Edit";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Edit</h2>
+
+<h4>Tbroker</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Edit">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input type="hidden" asp-for="ID" />
+            <div class="form-group">
+                <label asp-for="MBROKERID" class="control-label"></label>
+                <input asp-for="MBROKERID" class="form-control" />
+                <span asp-validation-for="MBROKERID" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="MPERUSAHAANASURANSIID" class="control-label"></label>
+                <input asp-for="MPERUSAHAANASURANSIID" class="form-control" />
+                <span asp-validation-for="MPERUSAHAANASURANSIID" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="MJENISASURANSIID" class="control-label"></label>
+                <input asp-for="MJENISASURANSIID" class="form-control" />
+                <span asp-validation-for="MJENISASURANSIID" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="MOKUPASIID" class="control-label"></label>
+                <input asp-for="MOKUPASIID" class="form-control" />
+                <span asp-validation-for="MOKUPASIID" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="NAMABROKER" class="control-label"></label>
+                <input asp-for="NAMABROKER" class="form-control" />
+                <span asp-validation-for="NAMABROKER" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="ALAMATBROKER" class="control-label"></label>
+                <input asp-for="ALAMATBROKER" class="form-control" />
+                <span asp-validation-for="ALAMATBROKER" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="EMAILBROKER" class="control-label"></label>
+                <input asp-for="EMAILBROKER" class="form-control" />
+                <span asp-validation-for="EMAILBROKER" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="TELEPONBROKER" class="control-label"></label>
+                <input asp-for="TELEPONBROKER" class="form-control" />
+                <span asp-validation-for="TELEPONBROKER" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="NAMAASURADUR" class="control-label"></label>
+                <input asp-for="NAMAASURADUR" class="form-control" />
+                <span asp-validation-for="NAMAASURADUR" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="ALAMATASURADUR" class="control-label"></label>
+                <input asp-for="ALAMATASURADUR" class="form-control" />
+                <span asp-validation-for="ALAMATASURADUR" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="EMAILASURADUR" class="control-label"></label>
+                <input asp-for="EMAILASURADUR" class="form-control" />
+                <span asp-validation-for="EMAILASURADUR" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="TELEPONASURADUR" class="control-label"></label>
+                <input asp-for="TELEPONASURADUR" class="form-control" />
+                <span asp-validation-for="TELEPONASURADUR" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="CONTACTPERSONASURADUR" class="control-label"></label>
+                <input asp-for="CONTACTPERSONASURADUR" class="form-control" />
+                <span asp-validation-for="CONTACTPERSONASURADUR" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="NOMINALCBC" class="control-label"></label>
+                <input asp-for="NOMINALCBC" class="form-control" />
+                <span asp-validation-for="NOMINALCBC" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="RESIKO" class="control-label"></label>
+                <input asp-for="RESIKO" class="form-control" />
+                <span asp-validation-for="RESIKO" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="TANGGALMULAI" class="control-label"></label>
+                <input asp-for="TANGGALMULAI" class="form-control" />
+                <span asp-validation-for="TANGGALMULAI" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="TANGGALSELESAI" class="control-label"></label>
+                <input asp-for="TANGGALSELESAI" class="form-control" />
+                <span asp-validation-for="TANGGALSELESAI" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="UPDATEDBYID" class="control-label"></label>
+                <input asp-for="UPDATEDBYID" class="form-control" />
+                <span asp-validation-for="UPDATEDBYID" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="UPDATEDTIME" class="control-label"></label>
+                <input asp-for="UPDATEDTIME" class="form-control" />
+                <span asp-validation-for="UPDATEDTIME" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="ISDELETED" class="control-label"></label>
+                <input asp-for="ISDELETED" class="form-control" />
+                <span asp-validation-for="ISDELETED" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="DELETEDBYID" class="control-label"></label>
+                <input asp-for="DELETEDBYID" class="form-control" />
+                <span asp-validation-for="DELETEDBYID" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="DELETEDTIME" class="control-label"></label>
+                <input asp-for="DELETEDTIME" class="form-control" />
+                <span asp-validation-for="DELETEDTIME" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="CREATEDTIME" class="control-label"></label>
+                <input asp-for="CREATEDTIME" class="form-control" />
+                <span asp-validation-for="CREATEDTIME" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="CREATEDBYID" class="control-label"></label>
+                <input asp-for="CREATEDBYID" class="form-control" />
+                <span asp-validation-for="CREATEDBYID" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="ISACTIVED" class="control-label"></label>
+                <input asp-for="ISACTIVED" class="form-control" />
+                <span asp-validation-for="ISACTIVED" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Save" class="btn btn-default" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

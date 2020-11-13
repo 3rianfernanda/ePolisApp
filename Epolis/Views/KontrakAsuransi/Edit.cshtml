@@ -1,0 +1,117 @@
+﻿@*@model Epolis.Models.Tkontrakasuransi*@
+@model Epolis.Models.ViewModel
+@{
+    ViewData["Title"] = "Edit";
+}
+
+<div class="app-page-title">
+    <div class="page-title-wrapper">
+        <div class="page-title-heading">
+            <div class="page-title-icon">
+                <i class="pe-7s-medal icon-gradient bg-tempting-azure"></i>
+            </div>
+        </div>
+        <div class="page-title-heading">UBAH DATA RATE PREMI</div>
+    </div>
+</div>
+<div class="main-card card col-12">
+    <div class="card-body">
+        <form asp-action="Edit" autocomplete="off">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input type="hidden" asp-for="kontrak.ID" />
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="position-relative row form-group">
+                <label asp-for="kontrak.MPERUSAHAANASURANSIID" class="col-sm-2 col-form-label"></label>
+                <p style="color:red">*</p>
+                <div class="col-sm-9">
+                    @Html.DropDownListFor(model => model.kontrak.MPERUSAHAANASURANSIID, new SelectList(ViewBag.DDLPerusahaan, "Value", "Text"), "Pilih Perusahaan Asuransi", new { @class = "form-control" })
+                    <span asp-validation-for="kontrak.MPERUSAHAANASURANSIID" class="text-danger"></span>
+                </div>
+            </div>
+            <div class="position-relative row form-group">
+                <label asp-for="kontrak.MJENISASURANSIID" class="col-sm-2 col-form-label"></label>
+                <p style="color:red">*</p>
+                <div class="col-sm-9">
+                    @Html.DropDownListFor(model => model.kontrak.MJENISASURANSIID, new SelectList(ViewBag.DDLJenis, "Value", "Text"), "Pilih Jenis Asuransi", new { @class = "form-control" })
+                    <span asp-validation-for="kontrak.MJENISASURANSIID" class="text-danger"></span>
+                </div>
+            </div>
+            <div class="position-relative row form-group">
+                <label asp-for="kontrak.MOKUPASIID" class="col-sm-2 col-form-label"></label>
+                <p style="color:red">*</p>
+                <div class="col-sm-9">
+                    @Html.DropDownListFor(model => model.kontrak.MOKUPASIID, new SelectList(ViewBag.DDLOkupasi, "Value", "Text"), "Pilih Okupasi", new { @class = "form-control", id = "@okupasi", @onchange = "display()" })
+                    <span asp-validation-for="kontrak.MOKUPASIID" class="text-danger"></span>
+                </div>
+            </div>
+            <div class="position-relative row form-group">
+                <label asp-for="kontrak.STDKELAS1" class="col-sm-2 col-form-label"></label>
+                <p style="color:red">*</p>
+                <div class="col-sm-9">
+                    @*@Html.TextBoxFor(s => Model.okupasi.KELAS1, new { @class = "myEditable", disabled = "disabled" })*@
+                    <input asp-for="kontrak.STDKELAS1" class="form-control" readonly id="kelas1" value="@ViewData["Kelas1"]" />
+                    <span asp-validation-for="kontrak.STDKELAS1" class="text-danger"></span>
+                </div>
+            </div>
+            <div class="position-relative row form-group">
+                <label asp-for="kontrak.STDKELAS2" class="col-sm-2 col-form-label"></label>
+                <p style="color:red">*</p>
+                <div class="col-sm-9">
+                    <input asp-for="kontrak.STDKELAS2" class="form-control" readonly id="kelas2" value="@ViewData["Kelas2"]" />
+                    <span asp-validation-for="kontrak.STDKELAS2" class="text-danger"></span>
+                </div>
+            </div>
+            <div class="position-relative row form-group">
+                <label asp-for="kontrak.RESIKO" class="col-sm-2 col-form-label"></label>
+                <p style="color:red">*</p>
+                <div class="col-sm-9">
+                    @Html.DropDownListFor(model => model.kontrak.RESIKO, new SelectList(ViewBag.DDLRes, "Res", "Res"), new { @class = "form-control", disabled = "disabled", id = "resiko" })
+                    <span asp-validation-for="kontrak.RESIKO" class="text-danger"></span>
+                </div>
+            </div>
+            <div class="position-relative row form-group">
+                <label asp-for="kontrak.TANGGALMULAI" class="col-sm-2 col-form-label"></label>
+                <p style="color:red"> </p>
+                <div class="col-sm-9">
+                    @* <i class="fa fa-calendar-alt"></i>*@
+                    <input asp-for="kontrak.TANGGALMULAI" class="form-control" type="date" data-toggle="datepicker-icon" />
+                    <span asp-validation-for="kontrak.TANGGALMULAI" class="text-danger"></span>
+                </div>
+            </div>
+            <div class="position-relative row form-group">
+                <label asp-for="kontrak.TANGGALSELESAI" class="col-sm-2 col-form-label"></label>
+                <p style="color:red"> </p>
+                <div class="col-sm-9">
+                    <input asp-for="kontrak.TANGGALSELESAI" class="form-control" type="date" data-toggle="datepicker-icon" />
+                    <span asp-validation-for="kontrak.TANGGALSELESAI" class="text-danger"></span>
+                </div>
+            </div>
+            <div class="position-relative row form-group" hidden>
+                <label asp-for="kontrak.CREATEDBYID" class="col-sm-2 col-form-label"></label>
+                <p style="color:red"> </p>
+                <div class="col-sm-9">
+                    <input asp-for="kontrak.CREATEDBYID" class="form-control" />
+                    <span asp-validation-for="kontrak.CREATEDBYID" class="text-danger"></span>
+                </div>
+            </div>
+            <div class="position-relative row form-group" hidden>
+                <label asp-for="kontrak.CREATEDTIME" class="col-sm-2 col-form-label"></label>
+                <p style="color:red"> </p>
+                <div class="col-sm-9">
+                    <input asp-for="kontrak.CREATEDTIME" class="form-control" value="@DateTime.Now" />
+                    <span asp-validation-for="kontrak.CREATEDTIME" class="text-danger"></span>
+                </div>
+            </div>
+            <div class="position-relative row form-check">
+                <div class="col-sm-9 offset-sm-2">
+                    <button class="btn btn-save pull-right" >Simpan</button>
+                </div>
+            </div>
+        </form>
+        <a asp-action="Index" class="btn btn-dark pull-left">Kembali</a>
+    </div>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

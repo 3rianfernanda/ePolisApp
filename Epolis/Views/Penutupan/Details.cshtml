@@ -1,0 +1,281 @@
+﻿@model Epolis.Models.AllrelationVm
+
+
+@{
+    ViewData["Title"] = "Details";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@*<script src="https://code.jquery.com/jquery-1.12.4.min.js"></script>*@
+<link href="~/lib/bootstrap//dist/css/bootstrap.css" rel="stylesheet" asp-append-version="true" />
+<link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+<script src="//ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<style type="text/css">
+    .selectt {
+        color: #000000;
+        padding: 30px;
+        display: none;
+        margin-top: 30px;
+        width: 60%;
+        background: white
+    }
+
+    label {
+        margin-right: 20px;
+    }
+</style>
+
+<div class="app-page-title">
+    <div class="page-title-wrapper">
+        <div class="page-title-heading">
+            <div class="page-title-icon">
+                <i class="pe-7s-medal icon-gradient bg-tempting-azure"></i>
+            </div>
+        </div>
+        <div class="page-title-heading">TAMBAH DATA PENUTUPAN</div>
+    </div>
+</div>
+<form asp-action="Process" autocomplete="off">
+    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+    <input asp-for="Tpenutupan.ID" id="idPenutupan" name="idPenutupan" hidden />
+    <div class="card-shadow-primary border mb-lg-5 card card-body border-primary">
+        <h5 class="card-title">Perincian Order Penutupan</h5>
+        <div class="position-relative row form-group">
+            <label @*asp-for=""*@ class="col-sm-3 col-form-label">Nama Pejabat</label>
+            <p style="color:red"></p>
+            <div class="col-sm-8">
+                <select class="form-control">
+                    <option>Lingga</option>
+                </select>
+                @*@Html.DropDownListFor(model => model.Tpenutupan.NAMAPEJABAT, (IEnumerable<SelectListItem>)ViewBag.DDLNamaPejabat, "Pilih Pejabat", new { @class = "form-control" })*@
+                <span @*asp-validation-for="Tpenutupan.NAMAPEJABAT"*@ class="text-danger"></span>
+            </div>
+        </div>
+        <div class="position-relative row form-group">
+            @*<label for="bodymail" class="col-sm-2 col-form-label">Body Mail</label>*@
+            <div class="col-sm-12">
+                <div id="bodymail">
+                    <div id="printableArea">
+                        <p>@Html.DisplayFor(model => model.Tpenutupan.ORDERDARIKOTA), @Html.DisplayFor(model => model.Tpenutupan.TGLINPUT)</p>
+                        <p>Nomor : @Html.DisplayFor(model => model.Tpenutupan.NOREGPENUTUPAN)</p>
+                        <p>Lampiran : 1 (satu) Set</p>
+                        <br />
+                        <p>Kepada</p>
+                        <p>@Html.DisplayFor(model => model.Mperusahaanasuransi.NAMAPERUSAHAAN)</p>
+                        <p>@Html.DisplayFor(model => model.Mperusahaanasuransi.ALAMAT)</p>
+                        <p>Hal : Order Penutupan Asuransi Jaminan untuk Debitur atas Nama @Html.DisplayFor(model => model.Tnasabah.NAMA)</p>
+                        <br />
+                        <p>
+                            Berkenaan dengan perihal pada pokok surat tersebut di atas, dengan ini kami sampaikan hal-hal
+                            sebagai berikut:
+                        </p>
+                        <p>
+                            1. Sehubungan dengan pemberian fasilitas kredit kepada debitur kami, bersama ini kami harapkan
+                            bantuan Saudara untuk melakukan penutupan asuransi kebakaran dengan perincian sebagai
+                            berikut:
+                        </p>
+                        <table class="table table-bordered">
+                                <tr>
+                                    @{
+                                        int sno = 0;
+                                    }
+                                    <th>No.</th>
+                                    <th>Nama Obyek Pertanggungan</th>
+                                    <th>Nilai Pertanggungan</th>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        @{ sno++; }
+                                        @sno
+                                    </td>
+                                    <td>Atas @Html.DisplayFor(model => model.Mokupasi.NAMAOKUPASI)</td>
+                                    <td></td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                    </td>
+                                    <td>Total TSI / Nilai Pertanggungan</td>
+                                    <td></td>
+                                </tr>
+                        </table>
+                        <p>
+                            2. Di dalam Perjanjian Asuransi (polis) harus dicantumkan klausula sedemikian rupa sehingga jika
+                            ada pembayaran ganti rugi dari Pihak Perusahaan Asuransi akan dibayarkan langsung kepada
+                            PT. Bank Negara Indonesia (Persero) Tbk untuk diperhitungkan dengan seluruh jumlah hutang
+                            Debitur kepada PT. Bank Negara Indonesia (Persero) Tbk (Banker's Clause).
+                        </p>
+                        <p>
+                            3. Seluruh biaya yang timbul berkenaan dengan pelaksanaan penutupan asuransi tersebut di atas
+                            menjadi beban @Html.DisplayFor(model => model.Tnasabah.NAMA) kecuali ditentukan lain. Sehubungan dengan hal tersebut,
+                            apabila terdapat hal-hal yang perlu dikoordinasikan lebih lanjut Saudara dapat menghubungi
+                            debitur tersebut.
+                        </p>
+                        <p>
+                            4. Sementara polis belum terbit dan belum disampaikan kepada BNI, Saudara agar menerbitkan
+                            covernote penutupan asuransi tersebut dan disampaikan kepada kami secara elektronik atau
+                            dikirimkan kepada kami, pada kesempatan pertama.
+                        </p><br />
+                        <p>Demikian kami sampaikan, atas perhatian dan kerjasama Saudara kami ucapkan terima kasih.</p><br />
+                        <p>PT. Bank Negara Indonesia (Persero) Tbk</p>
+                        <p>@Html.DisplayFor(model => model.Mlookup.NAME)</p>
+                        <br />
+                        <p>Surat ini dikeluarkan Otomatis Oleh Sistem</p>
+                        <p>Sehingga tidak memerlukan tanda tangan</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div>
+            <input type="button" class="btn btn-primary pull-right fa fa-print" onclick="printDiv('printableArea')" value="Cetak" />
+        </div><br />
+        <div class="card-shadow-primary border mb-lg-5 card card-body border-primary">
+            <h5 class="card-title">Permintaan Angsuran Pembayaran Premi</h5>
+            <label class="col-sm-2 col-form-label">Pilih Reviewer</label>
+            <div class="col-sm-4">
+                @Html.DropDownList("Reviewer", new SelectList(ViewBag.DDLUser, "Value", "Text"), "Pilih Reviewer", new { @class = "form-control", @id = "cbReviewer" })
+                <input id="inputReviewer" name="inputReviewer" hidden />
+            </div>
+            <label class="col-sm-2 col-form-label">Pilih Approver</label>
+            <div class="col-sm-4">
+                @Html.DropDownList("Approver", new SelectList(ViewBag.DDLUser, "Value", "Text"), "Pilih Approver", new { @class = "form-control", @id = "cbApproval" })
+                <input id="inputApproval" name="inputApproval" hidden />
+            </div>
+        </div>
+        <div class="card-shadow-primary border mb-lg-5 card card-body border-primary">
+            <h5 class="card-title">Catatan</h5>
+            <div class="form-group">
+                <input asp-for="Tcatatan.CATATAN" class="form-control" />
+            </div>
+            <div class="form-group">
+                <div class="main-card card col-12">
+                    <div class="card-body">
+                        <div class="position-relative row form-group">
+                            <label class="col-sm-3 col-form-label">Komentar</label>
+                            <p style="color:red">*</p>
+                            <div class="col-sm-8">
+                                <input asp-for="Tcatatan.CATATAN" class="form-control" />
+                            </div>
+                        </div>
+                        <br />
+                        <table style="width: 100%;" id="table" class="table table-bordered table-hover">
+                            <thead>
+                                <tr>
+                                    <th>NO</th>
+                                    <th>
+                                        Npp
+                                    </th>
+                                    <th>
+                                        Nama
+                                    </th>
+                                    <th>
+                                        Role
+                                    </th>
+                                    <th>
+                                        @Html.DisplayNameFor(model => model.Tcatatan.CATATAN)
+                                    </th>
+                                    <th>
+                                        @Html.DisplayNameFor(model => model.Tcatatan.CREATEDTIME)
+                                    </th>
+                                    <th>
+                                        Status
+                                    </th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @{
+                                    if (Model.Tcatatans != null)
+                                    {
+                                        @foreach (var item in Model.Tcatatans)
+                                        {
+                                            <tr>
+                                                <td style="text-align:center">
+                                                    @{ sno++; }
+                                                    @sno
+                                                </td>
+                                                <td>
+                                                </td>
+                                                <td>
+                                                </td>
+                                                <td>
+                                                </td>
+                                                <td>
+                                                    @Html.DisplayFor(modelItem => item.CATATAN)
+                                                </td>
+                                                <td>
+                                                    @Html.DisplayFor(modelItem => item.CREATEDTIME)
+                                                </td>
+                                                <td>
+                                                </td>
+                                            </tr>
+                                        }
+                                    }
+                                }
+
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-primary pull-right">Simpan</button>
+            </div>
+        </div>
+     </div>
+</form>
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $("#cbReviewer").change(function () {
+                $("#inputReviewer").val($("#cbReviewer option:selected").val());
+            });
+            $("#cbApproval").change(function () {
+                $("#inputApproval").val($("#cbApproval option:selected").val());
+            });
+        });
+    </script>
+
+    <script>
+        function printDiv(divName) {
+            var printContents = document.getElementById(divName).innerHTML;
+            var originalContents = document.body.innerHTML;
+
+            document.body.innerHTML = printContents;
+
+            window.print();
+
+            document.body.innerHTML = originalContents;
+        }
+    </script>
+
+    <script type="text/javascript">
+        // add row
+        $("#addRow").click(function () {
+            var html = '';
+            html += '<div id="inputFormRow">';
+            html += '<div class="input-group mb-3">';
+            html += '<input type="text" name="title[]" class="form-control m-input" placeholder="Enter title" autocomplete="off">';
+            html += '<div class="input-group-append">';
+            html += '<button id="removeRow" type="button" class="btn btn-danger">Remove</button>';
+            html += '</div>';
+            html += '</div>';
+
+            $('#newRow').append(html);
+        });
+
+        // remove row
+        $(document).on('click', '#removeRow', function () {
+            $(this).closest('#inputFormRow').remove();
+        });
+    </script>
+
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="~/lib/js/jquery-3.5.1.slim.min.js"></script>
+    <script src="~/lib/js/ckeditor.js"></script>
+    <script src="~/lib/js/app.js"></script>
+}r

@@ -1,0 +1,754 @@
+﻿@*@model IEnumerable<Epolis.Models.Mmenu>*@
+@using Microsoft.AspNetCore.Http
+@using Microsoft.AspNetCore.Mvc;
+@using System.Drawing;
+@using System.Drawing.Imaging;
+@using System.IO;
+@inject Microsoft.AspNetCore.Hosting.IWebHostEnvironment env;
+
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta http-equiv="Content-Language" content="en">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>E-Polis</title>
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, shrink-to-fit=no" />
+    <meta name="description" content="Choose between regular React Bootstrap tables or advanced dynamic ones.">
+    <link rel="icon" type="image/png" href="~/theme/content/assets/images/BNI-Mini-Logo.png" />
+
+    <!-- Disable tap highlight on IE -->
+    <meta name="msapplication-tap-highlight" content="no">
+
+    <link href="~/theme/content/main.css" rel="stylesheet" asp-append-version="true">
+    <link href="~/css/jquery.dataTables.min.css" rel="stylesheet" asp-append-version="true" />
+    <link href="~/css/datatables.min.css" rel="stylesheet" asp-append-version="true" />
+    <link href="~/css/Table.css" rel="stylesheet" asp-append-version="true" />
+
+</head>
+
+<body>
+    @if (Context.Session.GetString("USERNAME") != null)
+    {
+        ViewBag.USERNAME = Context.Session.GetString("USERNAME");
+        ViewBag.USERGROUPNAME = Context.Session.GetString("USERGROUPNAME");
+    }
+    else
+    {
+        @Url.Action("LoginCheck", "Login")
+    }
+    <div class="app-container app-theme-white body-tabs-shadow fixed-header fixed-sidebar">
+        <div class="app-header header-shadow">
+            <div class="app-header__logo">
+                <div class="">
+                    <img src="~/theme/content/assets/images/bni.png" />
+                </div>
+                <div class="header__pane ml-auto">
+                    <div>
+                        <button type="button" class="hamburger close-sidebar-btn hamburger--elastic" data-class="closed-sidebar">
+                            <span class="hamburger-box">
+                                <span class="hamburger-inner"></span>
+                            </span>
+                        </button>
+                    </div>
+                </div>
+            </div>
+            <div class="app-header__mobile-menu">
+                <div>
+                    <button type="button" class="hamburger hamburger--elastic mobile-toggle-nav">
+                        <span class="hamburger-box">
+                            <span class="hamburger-inner"></span>
+                        </span>
+                    </button>
+                </div>
+            </div>
+            <div class="app-header__menu">
+                <span>
+                    <button type="button" class="btn-icon btn-icon-only btn btn-primary btn-sm mobile-toggle-header-nav">
+                        <span class="btn-icon-wrapper">
+                            <i class="fa fa-ellipsis-v fa-w-6"></i>
+                        </span>
+                    </button>
+                </span>
+            </div>    <div class="app-header__content">
+                <div class="app-header-left">
+                    <button class="close"></button>
+                </div>
+                <div class="app-header-right">
+                    <div class="header-dots">
+                    </div>
+                    <div class="header-btn-lg pr-0">
+                        <div class="widget-content p-0">
+                            <div class="widget-content-wrapper">
+                                <div class="widget-content-left">
+                                    <div class="btn-group">
+                                        <a data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" class="p-0 btn">
+                                            <img width="42" class="rounded-circle" src="assets/images/avatars/1.jpg" alt="">
+                                            <i class="fa fa-angle-down ml-2 opacity-8"></i>
+                                        </a>
+                                        <div tabindex="-1" role="menu" aria-hidden="true" class="rm-pointers dropdown-menu-lg dropdown-menu dropdown-menu-right">
+                                            <div class="dropdown-menu-header">
+                                                <div class="dropdown-menu-header-inner bg-info">
+                                                    <div class="menu-header-image opacity-2" style="background-image: url('assets/images/dropdown-header/city3.jpg');"></div>
+                                                    <div class="menu-header-content text-left">
+                                                        <div class="widget-content p-0">
+                                                            <div class="widget-content-wrapper">
+                                                                <div class="widget-content-left mr-3">
+                                                                    <img width="42" class="rounded-circle" src="assets/images/avatars/1.jpg" alt="">
+                                                                </div>
+                                                                <div class="widget-content-left">
+                                                                    <div class="widget-heading">@ViewBag.USERNAME</div>
+                                                                    <div class="widget-subheading opacity-8">@ViewBag.USERGROUPNAME</div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="scroll-area-xs" style="height: 150px;">
+                                                <div class="scrollbar-container ps">
+                                                </div>
+                                            </div>
+                                            <ul class="nav flex-column">
+                                                <li class="nav-item-divider mb-0 nav-item"></li>
+                                            </ul>
+                                            <div>
+                                                <center><a href="@Url.Action("Logout", "Login")">Logout</a></center>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="widget-content-left  ml-3 header-user-info">
+                                    <div class="widget-heading">@ViewBag.USERNAME</div>
+                                    <div class="widget-subheading">@ViewBag.USERGROUPNAME </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>        <div class="ui-theme-settings">
+            <button type="button" id="TooltipDemo" class="btn-open-options btn btn-warning">
+                <i class="fa fa-cog fa-w-16 fa-spin fa-2x"></i>
+            </button>
+            <div class="theme-settings__inner">
+                <div class="scrollbar-container">
+                    <div class="theme-settings__options-wrapper">
+                        <h3 class="themeoptions-heading">Layout Options</h3>
+                        <div class="p-3">
+                            <ul class="list-group">
+                                <li class="list-group-item">
+                                    <div class="widget-content p-0">
+                                        <div class="widget-content-wrapper">
+                                            <div class="widget-content-left mr-3">
+                                                <div class="switch has-switch switch-container-class" data-class="fixed-header">
+                                                    <div class="switch-animate switch-on">
+                                                        <input type="checkbox" checked data-toggle="toggle" data-onstyle="success">
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="widget-content-left">
+                                                <div class="widget-heading">Fixed Header</div>
+                                                <div class="widget-subheading">Makes the header top fixed, always visible!</div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </li>
+                                <li class="list-group-item">
+                                    <div class="widget-content p-0">
+                                        <div class="widget-content-wrapper">
+                                            <div class="widget-content-left mr-3">
+                                                <div class="switch has-switch switch-container-class"
+                                                     data-class="fixed-sidebar">
+                                                    <div class="switch-animate switch-on">
+                                                        <input type="checkbox" checked data-toggle="toggle" data-onstyle="success">
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="widget-content-left">
+                                                <div class="widget-heading">Fixed Sidebar</div>
+                                                <div class="widget-subheading">Makes the sidebar left fixed, always visible!</div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </li>
+                                <li class="list-group-item">
+                                    <div class="widget-content p-0">
+                                        <div class="widget-content-wrapper">
+                                            <div class="widget-content-left mr-3">
+                                                <div class="switch has-switch switch-container-class" data-class="fixed-footer">
+                                                    <div class="switch-animate switch-off">
+                                                        <input type="checkbox" data-toggle="toggle" data-onstyle="success">
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="widget-content-left">
+                                                <div class="widget-heading">Fixed Footer</div>
+                                                <div class="widget-subheading">Makes the app footer bottom fixed, always visible!</div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </li>
+                            </ul>
+                        </div>
+                        <h3 class="themeoptions-heading">
+                            <div> Header Options </div>
+                            <button type="button" class="btn-pill btn-shadow btn-wide ml-auto btn btn-focus btn-sm switch-header-cs-class" data-class="">
+                                Restore Default
+                            </button>
+                        </h3>
+                        <div class="p-3">
+                            <ul class="list-group">
+                                <li class="list-group-item">
+                                    <h5 class="pb-2">Choose Color Scheme</h5>
+                                    <div class="theme-settings-swatches">
+                                        <div class="swatch-holder bg-primary switch-header-cs-class" data-class="bg-primary header-text-light"></div>
+                                        <div class="swatch-holder bg-secondary switch-header-cs-class" data-class="bg-secondary header-text-light"></div>
+                                        <div class="swatch-holder bg-success switch-header-cs-class" data-class="bg-success header-text-light"></div>
+                                        <div class="swatch-holder bg-info switch-header-cs-class" data-class="bg-info header-text-light"></div>
+                                        <div class="swatch-holder bg-warning switch-header-cs-class" data-class="bg-warning header-text-dark"></div>
+                                        <div class="swatch-holder bg-danger switch-header-cs-class" data-class="bg-danger header-text-light"></div>
+                                        <div class="swatch-holder bg-light switch-header-cs-class" data-class="bg-light header-text-dark"></div>
+                                        <div class="swatch-holder bg-dark switch-header-cs-class" data-class="bg-dark header-text-light"></div>
+                                        <div class="swatch-holder bg-focus switch-header-cs-class" data-class="bg-focus header-text-light"></div>
+                                        <div class="swatch-holder bg-alternate switch-header-cs-class" data-class="bg-alternate header-text-light"></div>
+                                        <div class="divider"></div>
+                                        <div class="swatch-holder bg-vicious-stance switch-header-cs-class" data-class="bg-vicious-stance header-text-light"></div>
+                                        <div class="swatch-holder bg-midnight-bloom switch-header-cs-class" data-class="bg-midnight-bloom header-text-light"></div>
+                                        <div class="swatch-holder bg-night-sky switch-header-cs-class" data-class="bg-night-sky header-text-light"></div>
+                                        <div class="swatch-holder bg-slick-carbon switch-header-cs-class" data-class="bg-slick-carbon header-text-light"></div>
+                                        <div class="swatch-holder bg-asteroid switch-header-cs-class" data-class="bg-asteroid header-text-light"></div>
+                                        <div class="swatch-holder bg-royal switch-header-cs-class" data-class="bg-royal header-text-light"></div>
+                                        <div class="swatch-holder bg-warm-flame switch-header-cs-class" data-class="bg-warm-flame header-text-dark"></div>
+                                        <div class="swatch-holder bg-night-fade switch-header-cs-class" data-class="bg-night-fade header-text-dark"></div>
+                                        <div class="swatch-holder bg-sunny-morning switch-header-cs-class" data-class="bg-sunny-morning header-text-dark"></div>
+                                        <div class="swatch-holder bg-tempting-azure switch-header-cs-class" data-class="bg-tempting-azure header-text-dark"></div>
+                                        <div class="swatch-holder bg-amy-crisp switch-header-cs-class" data-class="bg-amy-crisp header-text-dark"></div>
+                                        <div class="swatch-holder bg-heavy-rain switch-header-cs-class" data-class="bg-heavy-rain header-text-dark"></div>
+                                        <div class="swatch-holder bg-mean-fruit switch-header-cs-class" data-class="bg-mean-fruit header-text-dark"></div>
+                                        <div class="swatch-holder bg-malibu-beach switch-header-cs-class" data-class="bg-malibu-beach header-text-light"></div>
+                                        <div class="swatch-holder bg-deep-blue switch-header-cs-class" data-class="bg-deep-blue header-text-dark"></div>
+                                        <div class="swatch-holder bg-ripe-malin switch-header-cs-class" data-class="bg-ripe-malin header-text-light"></div>
+                                        <div class="swatch-holder bg-arielle-smile switch-header-cs-class" data-class="bg-arielle-smile header-text-light"></div>
+                                        <div class="swatch-holder bg-plum-plate switch-header-cs-class" data-class="bg-plum-plate header-text-light"></div>
+                                        <div class="swatch-holder bg-happy-fisher switch-header-cs-class" data-class="bg-happy-fisher header-text-dark"></div>
+                                        <div class="swatch-holder bg-happy-itmeo switch-header-cs-class" data-class="bg-happy-itmeo header-text-light"></div>
+                                        <div class="swatch-holder bg-mixed-hopes switch-header-cs-class" data-class="bg-mixed-hopes header-text-light"></div>
+                                        <div class="swatch-holder bg-strong-bliss switch-header-cs-class" data-class="bg-strong-bliss header-text-light"></div>
+                                        <div class="swatch-holder bg-grow-early switch-header-cs-class" data-class="bg-grow-early header-text-light"></div>
+                                        <div class="swatch-holder bg-love-kiss switch-header-cs-class" data-class="bg-love-kiss header-text-light"></div>
+                                        <div class="swatch-holder bg-premium-dark switch-header-cs-class" data-class="bg-premium-dark header-text-light"></div>
+                                        <div class="swatch-holder bg-happy-green switch-header-cs-class" data-class="bg-happy-green header-text-light"></div>
+                                    </div>
+                                </li>
+                            </ul>
+                        </div>
+                        <h3 class="themeoptions-heading">
+                            <div>Sidebar Options</div>
+                            <button type="button" class="btn-pill btn-shadow btn-wide ml-auto btn btn-focus btn-sm switch-sidebar-cs-class" data-class="">
+                                Restore Default
+                            </button>
+                        </h3>
+                        <div class="p-3">
+                            <ul class="list-group">
+                                <!--<li class="list-group-item">
+                                    <div class="widget-content p-0">
+                                        <div class="widget-content-wrapper">
+                                            <div class="widget-content-left mr-3">
+                                                <div class="switch has-switch" data-on-label="ON" data-off-label="OFF">
+                                                    <div class="switch-animate switch-off">
+                                                        <input type="checkbox" data-toggle="toggle" data-onstyle="success">
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="widget-content-left">
+                                                <div class="widget-heading">Sidebar Background Image
+                                                </div>
+                                                <div class="widget-subheading">Enable background images for sidebar!
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </li>-->
+                                <li class="list-group-item">
+                                    <h5 class="pb-2">Choose Color Scheme</h5>
+                                    <div class="theme-settings-swatches">
+                                        <div class="swatch-holder bg-primary switch-sidebar-cs-class" data-class="bg-primary sidebar-text-light"></div>
+                                        <div class="swatch-holder bg-secondary switch-sidebar-cs-class" data-class="bg-secondary sidebar-text-light"></div>
+                                        <div class="swatch-holder bg-success switch-sidebar-cs-class" data-class="bg-success sidebar-text-dark"></div>
+                                        <div class="swatch-holder bg-info switch-sidebar-cs-class" data-class="bg-info sidebar-text-dark"></div>
+                                        <div class="swatch-holder bg-warning switch-sidebar-cs-class" data-class="bg-warning sidebar-text-dark"></div>
+                                        <div class="swatch-holder bg-danger switch-sidebar-cs-class" data-class="bg-danger sidebar-text-light"></div>
+                                        <div class="swatch-holder bg-light switch-sidebar-cs-class" data-class="bg-light sidebar-text-dark"></div>
+                                        <div class="swatch-holder bg-dark switch-sidebar-cs-class" data-class="bg-dark sidebar-text-light"></div>
+                                        <div class="swatch-holder bg-focus switch-sidebar-cs-class" data-class="bg-focus sidebar-text-light"></div>
+                                        <div class="swatch-holder bg-alternate switch-sidebar-cs-class" data-class="bg-alternate sidebar-text-light"></div>
+                                        <div class="divider"></div>
+                                        <div class="swatch-holder bg-vicious-stance switch-sidebar-cs-class" data-class="bg-vicious-stance sidebar-text-light"></div>
+                                        <div class="swatch-holder bg-midnight-bloom switch-sidebar-cs-class" data-class="bg-midnight-bloom sidebar-text-light"></div>
+                                        <div class="swatch-holder bg-night-sky switch-sidebar-cs-class" data-class="bg-night-sky sidebar-text-light"></div>
+                                        <div class="swatch-holder bg-slick-carbon switch-sidebar-cs-class" data-class="bg-slick-carbon sidebar-text-light"></div>
+                                        <div class="swatch-holder bg-asteroid switch-sidebar-cs-class" data-class="bg-asteroid sidebar-text-light"></div>
+                                        <div class="swatch-holder bg-royal switch-sidebar-cs-class" data-class="bg-royal sidebar-text-light"></div>
+                                        <div class="swatch-holder bg-warm-flame switch-sidebar-cs-class" data-class="bg-warm-flame sidebar-text-dark"></div>
+                                        <div class="swatch-holder bg-night-fade switch-sidebar-cs-class" data-class="bg-night-fade sidebar-text-dark"></div>
+                                        <div class="swatch-holder bg-sunny-morning switch-sidebar-cs-class" data-class="bg-sunny-morning sidebar-text-dark"></div>
+                                        <div class="swatch-holder bg-tempting-azure switch-sidebar-cs-class" data-class="bg-tempting-azure sidebar-text-dark"></div>
+                                        <div class="swatch-holder bg-amy-crisp switch-sidebar-cs-class" data-class="bg-amy-crisp sidebar-text-dark"></div>
+                                        <div class="swatch-holder bg-heavy-rain switch-sidebar-cs-class" data-class="bg-heavy-rain sidebar-text-dark"></div>
+                                        <div class="swatch-holder bg-mean-fruit switch-sidebar-cs-class" data-class="bg-mean-fruit sidebar-text-dark"></div>
+                                        <div class="swatch-holder bg-malibu-beach switch-sidebar-cs-class" data-class="bg-malibu-beach sidebar-text-light"></div>
+                                        <div class="swatch-holder bg-deep-blue switch-sidebar-cs-class" data-class="bg-deep-blue sidebar-text-dark"></div>
+                                        <div class="swatch-holder bg-ripe-malin switch-sidebar-cs-class" data-class="bg-ripe-malin sidebar-text-light"></div>
+                                        <div class="swatch-holder bg-arielle-smile switch-sidebar-cs-class" data-class="bg-arielle-smile sidebar-text-light"></div>
+                                        <div class="swatch-holder bg-plum-plate switch-sidebar-cs-class" data-class="bg-plum-plate sidebar-text-light"></div>
+                                        <div class="swatch-holder bg-happy-fisher switch-sidebar-cs-class" data-class="bg-happy-fisher sidebar-text-dark"></div>
+                                        <div class="swatch-holder bg-happy-itmeo switch-sidebar-cs-class" data-class="bg-happy-itmeo sidebar-text-light"></div>
+                                        <div class="swatch-holder bg-mixed-hopes switch-sidebar-cs-class" data-class="bg-mixed-hopes sidebar-text-light"></div>
+                                        <div class="swatch-holder bg-strong-bliss switch-sidebar-cs-class" data-class="bg-strong-bliss sidebar-text-light"></div>
+                                        <div class="swatch-holder bg-grow-early switch-sidebar-cs-class" data-class="bg-grow-early sidebar-text-light"></div>
+                                        <div class="swatch-holder bg-love-kiss switch-sidebar-cs-class" data-class="bg-love-kiss sidebar-text-light"></div>
+                                        <div class="swatch-holder bg-premium-dark switch-sidebar-cs-class" data-class="bg-premium-dark sidebar-text-light"></div>
+                                        <div class="swatch-holder bg-happy-green switch-sidebar-cs-class" data-class="bg-happy-green sidebar-text-light"></div>
+                                    </div>
+                                </li>
+                            </ul>
+                        </div>
+                        <h3 class="themeoptions-heading">
+                            <div>Main Content Options</div>
+                            <button type="button" class="btn-pill btn-shadow btn-wide ml-auto active btn btn-focus btn-sm">Restore Default</button>
+                        </h3>
+                        <div class="p-3">
+                            <ul class="list-group">
+                                <li class="list-group-item">
+                                    <h5 class="pb-2">Page Section Tabs</h5>
+                                    <div class="theme-settings-swatches">
+                                        <div role="group" class="mt-2 btn-group">
+                                            <button type="button" class="btn-wide btn-shadow btn-primary btn btn-secondary switch-theme-class" data-class="body-tabs-line"> Line</button>
+                                            <button type="button" class="btn-wide btn-shadow btn-primary active btn btn-secondary switch-theme-class" data-class="body-tabs-shadow"> Shadow </button>
+                                        </div>
+                                    </div>
+                                </li>
+                                <li class="list-group-item">
+                                    <h5 class="pb-2">
+                                        Light Color Schemes
+                                    </h5>
+                                    <div class="theme-settings-swatches">
+                                        <div role="group" class="mt-2 btn-group">
+                                            <button type="button" class="btn-wide btn-shadow btn-primary active btn btn-secondary switch-theme-class" data-class="app-theme-white"> White Theme</button>
+                                            <button type="button" class="btn-wide btn-shadow btn-primary btn btn-secondary switch-theme-class" data-class="app-theme-gray"> Gray Theme</button>
+                                        </div>
+                                    </div>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>        <div class="app-main">
+            <div class="app-sidebar sidebar-shadow">
+                <div class="app-header__logo">
+                    <div class=""><img src="~/theme/content/assets/images/bni.png" /></div>
+                    <div class="header__pane ml-auto">
+                        <div>
+                            <button type="button" class="hamburger close-sidebar-btn hamburger--elastic" data-class="closed-sidebar">
+                                <span class="hamburger-box">
+                                    <span class="hamburger-inner"></span>
+                                </span>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                <div class="app-header__mobile-menu">
+                    <div>
+                        <button type="button" class="hamburger hamburger--elastic mobile-toggle-nav">
+                            <span class="hamburger-box">
+                                <span class="hamburger-inner"></span>
+                            </span>
+                        </button>
+                    </div>
+                </div>
+                <div class="app-header__menu">
+                    <span>
+                        <button type="button" class="btn-icon btn-icon-only btn btn-primary btn-sm mobile-toggle-header-nav">
+                            <span class="btn-icon-wrapper">
+                                <i class="fa fa-ellipsis-v fa-w-6"></i>
+                            </span>
+                        </button>
+                    </span>
+                </div>
+                <div class="scrollbar-sidebar">
+                    <div class="app-sidebar__inner">
+                        <ul class="vertical-nav-menu">
+                            <li class="app-sidebar__heading">HOME</li>
+                            <li id="home">
+                                <a href="@Url.Action("Index","Home")">
+                                    <i class="metismenu-icon pe-7s-home"></i>Dashboard
+                                </a>
+                            </li>
+                            @if (Context.Session.GetString("USERGROUPCODE") == "ADM")
+                            {
+                                <li class="app-sidebar__heading">MASTER</li>
+                                <li>
+                                    <a href="#">
+                                        <i class="metismenu-icon pe-7s-notebook"></i>Parameter
+                                        <i class="metismenu-state-icon pe-7s-angle-down caret-left"></i>
+                                    </a>
+                                    <ul>
+                                        @*<li id="user">
+                        <a href="@Url.Action("Index","User")">
+                            <i class="metismenu-icon"></i>User
+                        </a>
+                    </li>*@
+                                        <li id="userGroup">
+                                            <a href="@Url.Action("Index","userGroup")">
+                                                <i class="metismenu-icon"></i>Grup User
+                                            </a>
+                                        </li>
+                                        <li id="sysparam">
+                                            <a href="@Url.Action("Index","Sysparam")">
+                                                <i class="metismenu-icon"></i>Sysparam
+                                            </a>
+                                        </li>
+                                        <li id="lookup">
+                                            <a href="@Url.Action("Index","Lookup")">
+                                                <i class="metismenu-icon"></i>Lookup
+                                            </a>
+                                        </li>
+                                        <li id="cabang">
+                                            <a href="@Url.Action("Index","Cabang")">
+                                                <i class="metismenu-icon"></i>Cabang
+                                            </a>
+                                        </li>
+                                        <li id="jenisasuransi">
+                                            <a href="@Url.Action("Index","JenisAsuransi")">
+                                                <i class="metismenu-icon"></i>Jenis Asuransi
+                                            </a>
+                                        </li>
+                                        <li id="perusahaanasuransi">
+                                            <a href="@Url.Action("Index","PerusahaanAsuransi")">
+                                                <i class="metismenu-icon"></i>Perusahaan Asuransi
+                                            </a>
+                                        </li>
+                                        <li id="broker">
+                                            <a href="@Url.Action("Index","Broker")">
+                                                <i class="metismenu-icon"></i>Broker
+                                            </a>
+                                        </li>
+                                        <li id="okupasi">
+                                            <a href="@Url.Action("Index","Okupasi")">
+                                                <i class="metismenu-icon"></i>Okupasi
+                                            </a>
+                                        </li>
+                                        <li id="perluasan">
+                                            <a href="@Url.Action("Index","Perluasan")">
+                                                <i class="metismenu-icon"></i>Perluasan
+                                            </a>
+                                        </li>
+                                        <li id="pertanggungan">
+                                            <a href="@Url.Action("Index","Pertanggungan")">
+                                                <i class="metismenu-icon"></i>Pertanggungan
+                                            </a>
+                                        </li>
+                                        <li id="unit">
+                                            <a href="@Url.Action("Index","Unit")">
+                                                <i class="metismenu-icon"></i>Unit
+                                            </a>
+                                        </li>
+                                        <li id="kontrak">
+                                            <a href="@Url.Action("Index","KontrakAsuransi")">
+                                                <i class="metismenu-icon"></i>Rate Premi
+                                            </a>
+                                        </li>
+                                    </ul>
+                                </li>
+                                <li class="app-sidebar__heading">TRANSAKSI</li>
+                                <li>
+                                    <a href="#">
+                                        <i class="metismenu-icon pe-7s-portfolio"></i>Penutupan
+                                        <i class="metismenu-state-icon pe-7s-angle-down caret-left"></i>
+                                    </a>
+                                    <ul>
+                                        <li id="inputpenutupan">
+                                            <a href="@Url.Action("Listorder","Penutupan")">
+                                                <i class="metismenu-icon"></i>List Order
+                                            </a>
+                                        </li>
+                                        @*<li id="inputpenutupan">
+                                            <a href="@Url.Action("Create","Penutupan")">
+                                                <i class="metismenu-icon"></i>Input Penutupan
+                                            </a>
+                                        </li>*@
+                                        <li id="listpenutupan">
+                                            <a href="@Url.Action("Index","Penutupan")">
+                                                <i class="metismenu-icon"></i>List Penutupan
+                                            </a>
+                                        </li>
+                                        <li id="Review">
+                                            <a href="@Url.Action("Index","Review")">
+                                                <i class="metismenu-icon"></i>Review Penutupan
+                                            </a>
+                                        </li>
+                                        <li id="approval">
+                                            <a href="@Url.Action("Index","PenutupanApproval")">
+                                                <i class="metismenu-icon"></i>Approval Penutupan
+                                            </a>
+                                        </li>
+                                        <li id="cetakpolis">
+                                            <a href="@Url.Action("CetakPolis","CetakPolis")">
+                                                <i class="metismenu-icon"></i>Cetak Polis
+                                            </a>
+                                        </li>
+                                    </ul>
+                                </li>
+                                <li>
+                                    <a href="#">
+                                        <i class="metismenu-icon pe-7s-portfolio"></i>Klaim
+                                        <i class="metismenu-state-icon pe-7s-angle-down caret-left"></i>
+                                    </a>
+                                    <ul>
+                                        <li>
+                                            <a href="#">
+                                                <i class="metismenu-icon"></i>Input Klaim
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a href="#">
+                                                <i class="metismenu-icon"></i>List Klaim
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a href="#">
+                                                <i class="metismenu-icon"></i>Approve Klaim
+                                            </a>
+                                        </li>
+                                    </ul>
+                                </li>
+                                <li>
+                                    <a href="#">
+                                        <i class="metismenu-icon pe-7s-portfolio"></i>Endorsement
+                                        <i class="metismenu-state-icon pe-7s-angle-down caret-left"></i>
+                                    </a>
+                                    <ul>
+                                        <li>
+                                            <a href="#">
+                                                <i class="metismenu-icon"></i>Input Endorsement
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a href="#">
+                                                <i class="metismenu-icon"></i>List Endorsement
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a href="#">
+                                                <i class="metismenu-icon"></i>Approve Endorsement
+                                            </a>
+                                        </li>
+                                    </ul>
+                                </li>
+                                <li class="app-sidebar__heading">LAPORAN</li>
+                                <li>
+                                    <a href="#">
+                                        <i class="metismenu-icon pe-7s-graph2"></i>Reports
+                                    </a>
+                                </li>
+                            }
+                            @if (Context.Session.GetString("USERGROUPCODE") == "INP")
+                            {
+                                <li class="app-sidebar__heading">TRANSAKSI</li>
+                                <li>
+                                    <a href="#">
+                                        <i class="metismenu-icon pe-7s-portfolio"></i>Penutupan
+                                        <i class="metismenu-state-icon pe-7s-angle-down caret-left"></i>
+                                    </a>
+                                    <ul>
+                                        <li id="inputpenutupan">
+                                            <a href="@Url.Action("Listorder","Penutupan")">
+                                                <i class="metismenu-icon"></i>List Order
+                                            </a>
+                                        </li>
+                                        @*<li id="inputpenutupan">
+                                            <a href="@Url.Action("Create","Penutupan")">
+                                                <i class="metismenu-icon"></i>Input Penutupan
+                                            </a>
+                                        </li>*@
+                                        <li id="listpenutupan">
+                                            <a href="@Url.Action("Index","Penutupan")">
+                                                <i class="metismenu-icon"></i>List Penutupan
+                                            </a>
+                                        </li>
+                                    </ul>
+                                </li>
+                                <li>
+                                    <a href="#">
+                                        <i class="metismenu-icon pe-7s-portfolio"></i>Klaim
+                                        <i class="metismenu-state-icon pe-7s-angle-down caret-left"></i>
+                                    </a>
+                                    <ul>
+                                        <li>
+                                            <a href="#">
+                                                <i class="metismenu-icon"></i>Input Klaim
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a href="#">
+                                                <i class="metismenu-icon"></i>List Klaim
+                                            </a>
+                                        </li>
+                                    </ul>
+                                </li>
+                                <li class="app-sidebar__heading">LAPORAN</li>
+                                <li>
+                                    <a href="#">
+                                        <i class="metismenu-icon pe-7s-graph2"></i>Reports
+                                    </a>
+                                </li>
+                            }
+                            @if (Context.Session.GetString("USERGROUPCODE") == "APP")
+                            {
+                                <li class="app-sidebar__heading">TRANSAKSI</li>
+                                <li>
+                                    <a href="#">
+                                        <i class="metismenu-icon pe-7s-portfolio"></i>Penutupan
+                                        <i class="metismenu-state-icon pe-7s-angle-down caret-left"></i>
+                                    </a>
+                                    <ul>
+                                        @*<li id="inputpenutupan">
+                                            <a href="@Url.Action("Create","Penutupan")">
+                                                <i class="metismenu-icon"></i>Input Penutupan
+                                            </a>
+                                        </li>*@
+                                        <li id="approval">
+                                            <a href="@Url.Action("Index","PenutupanApproval")">
+                                                <i class="metismenu-icon"></i>Approval Penutupan
+                                            </a>
+                                        </li>
+                                    </ul>
+                                </li>
+                                <li>
+                                    <a href="#">
+                                        <i class="metismenu-icon pe-7s-portfolio"></i>Klaim
+                                        <i class="metismenu-state-icon pe-7s-angle-down caret-left"></i>
+                                    </a>
+                                    <ul>
+                                        <li>
+                                            <a href="#">
+                                                <i class="metismenu-icon"></i>Input Klaim
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a href="#">
+                                                <i class="metismenu-icon"></i>List Klaim
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a href="#">
+                                                <i class="metismenu-icon"></i>Approve Klaim
+                                            </a>
+                                        </li>
+                                    </ul>
+                                </li>
+                                <li class="app-sidebar__heading">LAPORAN</li>
+                                <li>
+                                    <a href="#">
+                                        <i class="metismenu-icon pe-7s-graph2"></i>Reports
+                                    </a>
+                                </li>
+                            }
+                            @if (Context.Session.GetString("USERGROUPCODE") == "BRK")
+                            {
+                                <li class="app-sidebar__heading">MASTER</li>
+                                <li>
+                                    <a href="#">
+                                        <i class="metismenu-icon pe-7s-notebook"></i>Parameter
+                                        <i class="metismenu-state-icon pe-7s-angle-down caret-left"></i>
+                                    </a>
+                                    <ul>
+                                        <li id="broker">
+                                            <a href="@Url.Action("Index","Broker")">
+                                                <i class="metismenu-icon"></i>Broker
+                                            </a>
+                                        </li>
+                                    </ul>
+                                </li>
+                                <li class="app-sidebar__heading">LAPORAN</li>
+                                <li>
+                                    <a href="#">
+                                        <i class="metismenu-icon pe-7s-graph2"></i>Reports
+                                    </a>
+                                </li>
+                            }
+                            @if (Context.Session.GetString("USERGROUPCODE") == "REV")
+                            {
+                                <li class="app-sidebar__heading">TRANSAKSI</li>
+                                <li>
+                                    <a href="#">
+                                        <i class="metismenu-icon pe-7s-portfolio"></i>Penutupan
+                                        <i class="metismenu-state-icon pe-7s-angle-down caret-left"></i>
+                                    </a>
+                                    <ul>
+                                        @*<li id="inputpenutupan">
+                                            <a href="@Url.Action("Create","Penutupan")">
+                                                <i class="metismenu-icon"></i>Input Penutupan
+                                            </a>
+                                        </li>*@
+                                        <li id="review">
+                                            <a href="@Url.Action("Index","Review")">
+                                                <i class="metismenu-icon"></i>Review Penutupan
+                                            </a>
+                                        </li>
+                                    </ul>
+                                </li>
+                            }
+                        </ul>
+                    </div>
+                </div>
+            </div>  <div class="app-main__outer col-12">
+                <div class="app-main__inner col-12">
+                    @RenderBody()
+                </div>
+                <div class="app-wrapper-footer">
+                    <div class="app-footer">
+                        <div class="app-footer__inner">
+                            @*<div class="app-footer-left">
+                                    <ul class="nav">
+                                        <li class="nav-item">
+                                            <a href="javascript:void(0);" class="nav-link">
+                                                Footer Link 1
+                                            </a>
+                                        </li>
+                                    </ul>
+                                </div>*@
+                            <div class="app-footer-right">
+                                <ul class="nav">
+                                    <li class="nav-item">
+                                        <a href="javascript:void(0);" class="nav-link">
+                                            &copy; Copyright BNI SDD e-Polis @DateTime.Now.Year
+                                        </a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="app-drawer-overlay d-none animated fadeIn"></div>
+    <script src="~/theme/content/assets/scripts/main.js" asp-append-version="true"></script>
+    <script src="~/js/jquery.min.js" asp-append-version="true"></script>
+    <script src="~/lib/datatables/js/jquery.dataTables.min.js"></script>
+    @*<script src="~/js/datatables.min.js" asp-append-version="true"></script>*@
+    <script src="~/js/DataTablescript.js" asp-append-version="true"></script>
+    <script src="~/js/sweetalert2@10.js" asp-append-version="true"></script>
+    <script src="~/js/alert.js" asp-append-version="true"></script>
+    <script src="~/theme/src/scripts-init/calendar.js" asp-append-version="true"></script>
+    <script src="~/js/Menu.js" asp-append-version="true"></script>
+    @RenderSection("Scripts", required: false)
+</body>
+
+</html>

@@ -1,0 +1,55 @@
+﻿@model Epolis.Models.Mperluasan
+
+@{
+    ViewData["Title"] = "Details";
+}
+
+<div class="app-page-title">
+    <div class="page-title-wrapper">
+        <div class="page-title-heading">
+            <div class="page-title-icon">
+                <i class="pe-7s-medal icon-gradient bg-tempting-azure"></i>
+            </div>
+        </div>
+        <div class="page-title-heading">DETAIL DATA PERLUASAN</div>
+    </div>
+</div>
+<div class="main-card card col-12">
+    <div class="card-body">
+        <br />
+        <dl class="row">
+            <dt class="col-sm-2">
+                @Html.DisplayNameFor(model => model.MOKUPASIID)
+            </dt>
+            <dd class="col-sm-10">
+                @Html.DisplayFor(model => model.MOKUPASIID)
+            </dd>
+            <dt class="col-sm-2">
+                @Html.DisplayNameFor(model => model.KODEPERLUASAN)
+            </dt>
+            <dd class="col-sm-10">
+                @Html.DisplayFor(model => model.KODEPERLUASAN)
+            </dd>
+            <dt class="col-sm-2">
+                @Html.DisplayNameFor(model => model.DESKRIPSI)
+            </dt>
+            <dd class="col-sm-10">
+                @Html.DisplayFor(model => model.DESKRIPSI)
+            </dd>
+            <dt class="col-sm-2">
+                @Html.DisplayNameFor(model => model.RATEPERLUASAN)
+            </dt>
+            <dd class="col-sm-10">
+                @Html.DisplayFor(model => model.RATEPERLUASAN)
+            </dd>
+            <dt class="col-sm-2">
+                @Html.DisplayNameFor(model => model.RESIKO)
+            </dt>
+            <dd class="col-sm-10">
+                @Html.DisplayFor(model => model.RESIKO)
+            </dd>
+        </dl>
+    </div>
+    <a asp-action="Index" class="btn btn-dark pull-left">Tutup</a>
+    <br />
+</div>

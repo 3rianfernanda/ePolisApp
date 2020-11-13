@@ -1,0 +1,76 @@
+﻿@model IEnumerable<Epolis.Models.Mmenu>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<div class="app-page-title">
+    <div class="page-title-wrapper">
+        <div class="page-title-heading">
+            <div class="page-title-icon">
+                <i class="pe-7s-medal icon-gradient bg-tempting-azure"></i>
+            </div>
+        </div>
+        <div class="page-title-heading">DAFTAR MENU</div>
+    </div>
+</div>
+<div class="main-card card col-12">
+    <div class="card-body">
+        <br />
+        <table style="width: 100%;" id="table" class="table table-bordered table-hover">
+            <thead>
+                <tr>
+                    <th>NO</th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.MENUNAME)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.MENUGROUP)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.MENUSUBGROUP)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.MENUPATH)
+                    </th>
+                    <th hidden>Action</th>
+                </tr>
+            </thead>
+            <tbody>
+                @{
+                    int sno = 0;
+                    //List<Mmenu> listMmenu = (List<Mmenu>)ViewData["listMlistMmenubroker"];
+                    //if (listMmenu != null)
+                    {
+                        foreach (var item in Model)
+                        {
+                            <tr>
+                                <td style="text-align:center">
+                                    @{ sno++; }
+                                    @sno
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.MENUNAME)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.MENUGROUP)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.MENUSUBGROUP)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.MENUPATH)
+                                </td>
+                                <td hidden>
+                                    <a asp-action="Edit" asp-route-id="@item.ID" data-toggle="tooltip" title="Edit" class="btn btn-edit fa fa-edit"></a> |
+                                    <a asp-action="Details" asp-route-id="@item.ID" data-toggle="tooltip" title="Lihat Detail" class="btn btn-detail fa fa-eye"></a> |
+                                    <a asp-action="Delete" asp-route-id="@item.ID" data-toggle="tooltip" title="Hapus" class="btn btn-delete fa fa-trash" onclick="return confirm('Hapus data ini?')"></a>
+                                </td>
+                            </tr>
+                        }
+                    }
+                }
+            </tbody>
+        </table>
+    </div>
+</div>

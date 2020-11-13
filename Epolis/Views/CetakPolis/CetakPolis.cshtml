@@ -1,0 +1,94 @@
+﻿@model IEnumerable<Tpenutupan>
+
+@{
+    ViewData["Title"] = "CetakPolis";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    ViewData["hasil"] = ViewBag.searchResult;
+}
+
+<div class="app-page-title">
+    <div class="page-title-wrapper">
+        <div class="page-title-heading">
+            <div class="page-title-icon">
+                <i class="pe-7s-medal icon-gradient bg-tempting-azure"></i>
+            </div>
+        </div>
+        <div class="page-title-heading">Cetak Polis</div>
+    </div>
+</div>
+<div class="main-card card col-12">
+    <div class="card-body">
+        <form asp-action="CetakPolis" autocomplete="off">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="position-relative row form-group">
+                <label class="col-sm-3 col-form-label">Nomor Reg. Surat Penutupan</label>
+                <div class="col-sm-7">
+                    <input name="searchnoreg" class="form-control" /><br />
+                    <div>
+                        <button  class="btn btn-save pull-right">Cari</button>
+                    </div>
+                    <br />
+                    @if (ViewBag.Penutupan != null)
+                    {
+                        <div>
+                            <span class="text-danger">@ViewBag.Penutupan</span>
+                        </div>
+                    }
+                    <br />
+                    <div>
+                        @if (Model != null)
+                        {
+                            <table style="width: 100%;" class="table table-bordered table-hover">
+                                <thead>
+                                    <tr>
+                                        <th>
+                                            @Html.DisplayNameFor(model => model.tnasabahID)
+                                        </th>
+                                        <th>
+                                            @Html.DisplayNameFor(model => model.NOREGPENUTUPAN)
+                                        </th>
+                                        <th>
+                                            @Html.DisplayNameFor(model => model.ORDERDARIKOTA)
+                                        </th>
+                                        <th>
+                                            @Html.DisplayNameFor(model => model.NOSKK)
+                                        </th>
+                                        <th>
+                                            @Html.DisplayNameFor(model => model.NOPK)
+                                        </th>
+                                        <th>Action</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @foreach (var item in Model)
+                                    {
+                                    <tr>
+                                        <td>
+                                            @Html.DisplayFor(modelItem => item.tnasabahID)
+                                        </td>
+                                        <td>
+                                            @Html.DisplayFor(modelItem => item.NOREGPENUTUPAN)
+                                        </td>
+                                        <td>
+                                            @Html.DisplayFor(modelItem => item.ORDERDARIKOTA)
+                                        </td>
+                                        <td>
+                                            @Html.DisplayFor(modelItem => item.NOSKK)
+                                        </td>
+                                        <td>
+                                            @Html.DisplayFor(modelItem => item.NOPK)
+                                        </td>
+                                        <td>
+                                            <a asp-action="CetakSertifikat" asp-route-id="@item.ID" data-toggle="tooltip" title="Cetak" class="btn btn-delete fa fa-print"></a>
+                                        </td>
+                                    </tr>
+                                    }
+                                </tbody>
+                            </table>
+                        }
+                    </div>
+            </div>
+           </div>
+        </form>
+    </div>
+</div>

@@ -1,0 +1,67 @@
+﻿@model Epolis.Models.Mperusahaanasuransi
+
+@{
+    ViewData["Title"] = "Details";
+}
+
+<div class="app-page-title">
+    <div class="page-title-wrapper">
+        <div class="page-title-heading">
+            <div class="page-title-icon">
+                <i class="pe-7s-medal icon-gradient bg-tempting-azure"></i>
+            </div>
+        </div>
+        <div class="page-title-heading">DETAIL DATA PERUSAHAAN ASURANSI</div>
+    </div>
+</div>
+<div class="main-card card col-12">
+    <div class="card-body">
+        <br />
+        <dl class="row">
+            <dt class="col-sm-2">
+                @Html.DisplayNameFor(model => model.KODEPERUSAHAAN)
+            </dt>
+            <dd class="col-sm-10">
+                @Html.DisplayFor(model => model.KODEPERUSAHAAN)
+            </dd>
+            <dt class="col-sm-2">
+                @Html.DisplayNameFor(model => model.NAMAPERUSAHAAN)
+            </dt>
+            <dd class="col-sm-10">
+                @Html.DisplayFor(model => model.NAMAPERUSAHAAN)
+            </dd>
+            <dt class="col-sm-2">
+                @Html.DisplayNameFor(model => model.ALAMAT)
+            </dt>
+            <dd class="col-sm-10">
+                @Html.DisplayFor(model => model.ALAMAT)
+            </dd>
+            <dt class="col-sm-2">
+                @Html.DisplayNameFor(model => model.NOTLP)
+            </dt>
+            <dd class="col-sm-10">
+                @Html.DisplayFor(model => model.NOTLP)
+            </dd>
+            <dt class="col-sm-2">
+                @Html.DisplayNameFor(model => model.NOFAX)
+            </dt>
+            <dd class="col-sm-10">
+                @Html.DisplayFor(model => model.NOFAX)
+            </dd>
+            <dt class="col-sm-2">
+                @Html.DisplayNameFor(model => model.CONTACTPERSON)
+            </dt>
+            <dd class="col-sm-10">
+                @Html.DisplayFor(model => model.CONTACTPERSON)
+            </dd>
+            <dt class="col-sm-2">
+                @Html.DisplayNameFor(model => model.EMAIL)
+            </dt>
+            <dd class="col-sm-10">
+                @Html.DisplayFor(model => model.EMAIL)
+            </dd>
+        </dl>
+    </div>
+    <a asp-action="Index" class="btn btn-dark pull-left">Tutup</a>
+    <br />
+</div>

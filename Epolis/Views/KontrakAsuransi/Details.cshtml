@@ -1,0 +1,73 @@
+﻿@model Epolis.Models.Tkontrakasuransi
+
+@{
+    ViewData["Title"] = "Details";
+}
+
+<div class="app-page-title">
+    <div class="page-title-wrapper">
+        <div class="page-title-heading">
+            <div class="page-title-icon">
+                <i class="pe-7s-medal icon-gradient bg-tempting-azure"></i>
+            </div>
+        </div>
+        <div class="page-title-heading">DETAIL DATA RATE PREMI</div>
+    </div>
+</div>
+<div class="main-card card col-12">
+    <div class="card-body">
+        <br />
+        <dl class="row">
+            <dt class="col-sm-2">
+                @Html.DisplayNameFor(model => model.MPERUSAHAANASURANSIID)
+            </dt>
+            <dd class="col-sm-10">
+                @Html.DisplayFor(model => model.MPERUSAHAANASURANSIID)
+            </dd>
+            <dt class="col-sm-2">
+                @Html.DisplayNameFor(model => model.MJENISASURANSIID)
+            </dt>
+            <dd class="col-sm-10">
+                @Html.DisplayFor(model => model.MJENISASURANSIID)
+            </dd>
+            <dt class="col-sm-2">
+                @Html.DisplayNameFor(model => model.MOKUPASIID)
+            </dt>
+            <dd class="col-sm-10">
+                @Html.DisplayFor(model => model.MOKUPASIID)
+            </dd>
+            <dt class="col-sm-2">
+                @Html.DisplayNameFor(model => model.STDKELAS1)
+            </dt>
+            <dd class="col-sm-10">
+                @Html.DisplayFor(model => model.STDKELAS1)
+            </dd>
+            <dt class="col-sm-2">
+                @Html.DisplayNameFor(model => model.STDKELAS2)
+            </dt>
+            <dd class="col-sm-10">
+                @Html.DisplayFor(model => model.STDKELAS2)
+            </dd>
+            <dt class="col-sm-2">
+                @Html.DisplayNameFor(model => model.RESIKO)
+            </dt>
+            <dd class="col-sm-10">
+                @Html.DisplayFor(model => model.RESIKO)
+            </dd>
+            <dt class="col-sm-2">
+                @Html.DisplayNameFor(model => model.TANGGALMULAI)
+            </dt>
+            <dd class="col-sm-10">
+                @Html.DisplayFor(model => model.TANGGALMULAI)
+            </dd>
+            <dt class="col-sm-2">
+                @Html.DisplayNameFor(model => model.TANGGALSELESAI)
+            </dt>
+            <dd class="col-sm-10">
+                @Html.DisplayFor(model => model.TANGGALSELESAI)
+            </dd>
+        </dl>
+    </div>
+    <a asp-action="Index" class="btn btn-dark pull-left">Tutup</a>
+    <br />
+</div>

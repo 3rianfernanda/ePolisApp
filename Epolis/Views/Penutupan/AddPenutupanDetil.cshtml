@@ -1,0 +1,131 @@
+﻿@model Epolis.Models.SPenutupan
+
+@{
+    ViewData["Title"] = "Create";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+<script src="https://code.jquery.com/jquery-1.12.4.min.js">
+</script>
+<style type="text/css">
+    .selectt {
+        color: #000000;
+        padding: 30px;
+        display: none;
+        margin-top: 30px;
+        width: 60%;
+        background: white
+    }
+
+    label {
+        margin-right: 20px;
+    }
+</style>
+
+<div class="app-page-title">
+    <div class="page-title-wrapper">
+        <div class="page-title-heading">
+            <div class="page-title-icon">
+                <i class="pe-7s-medal icon-gradient bg-tempting-azure"></i>
+            </div>
+        </div>
+        <div class="page-title-heading">TAMBAH DATA PENUTUPAN</div>
+    </div>
+</div>
+<div class="main-card card col-12">
+    <div class="card-body">
+        <form asp-action="AddPenutupanDetil" autocomplete="off">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="position-relative row form-group">
+                <label asp-for="tpenutupandetil.NAMATERTANGGUNG" class="col-sm-2 col-form-label"></label>
+                <p style="color:red">*</p>
+                <div class="col-sm-9">
+                    <input asp-for="tpenutupandetil.NAMATERTANGGUNG" class="form-control" />
+                    <span asp-validation-for="tpenutupandetil.NAMATERTANGGUNG" class="text-danger"></span>
+                </div>
+            </div>
+
+            <div class="position-relative row form-group">
+                <label asp-for="tpenutupandetil.LOKASIOBJEKTERTANGGUNG" class="col-sm-2 col-form-label"></label>
+                <p style="color:red">*</p>
+                <div class="col-sm-9">
+                    <input asp-for="tpenutupandetil.LOKASIOBJEKTERTANGGUNG" class="form-control" />
+                    <span asp-validation-for="tpenutupandetil.LOKASIOBJEKTERTANGGUNG" class="text-danger"></span>
+                </div>
+            </div>
+
+            <div class="position-relative row form-group">
+                <label asp-for="tpenutupandetil.MATAUANG" class="col-sm-2 col-form-label"></label>
+                <p style="color:red">*</p>
+                <div class="col-sm-9">
+                    <input asp-for="tpenutupandetil.MATAUANG" class="form-control" />
+                    <span asp-validation-for="tpenutupandetil.MATAUANG" class="text-danger"></span>
+                </div>
+            </div>
+
+            <div class="position-relative row form-group">
+                <label asp-for="tpenutupandetil.JUMLAHPERTANGGUNGAN" class="col-sm-2 col-form-label"></label>
+                <p style="color:red">*</p>
+                <div class="col-sm-9">
+                    <input asp-for="tpenutupandetil.JUMLAHPERTANGGUNGAN" class="form-control" />
+                    <span asp-validation-for="tpenutupandetil.JUMLAHPERTANGGUNGAN" class="text-danger"></span>
+                </div>
+            </div>
+
+            <div class="position-relative row form-group">
+                <label asp-for="tpenutupandetil.TAKSASI" class="col-sm-2 col-form-label"></label>
+                <p style="color:red">*</p>
+                <div class="col-sm-9">
+                    <input asp-for="tpenutupandetil.TAKSASI" class="form-control" />
+                    <span asp-validation-for="tpenutupandetil.TAKSASI" class="text-danger"></span>
+                </div>
+            </div>
+
+            @*<div class="position-relative row form-group">
+                <label asp-for="catatan.CATATAN" class="col-sm-2 col-form-label"></label>
+                <p style="color:red">*</p>
+                <div class="col-sm-9">
+                    <textarea asp-for="catatan.CATATAN" class="form-control"></textarea>
+                    <span asp-validation-for="catatan.CATATAN" class="text-danger"></span>
+                </div>
+            </div>*@
+
+            <div class="position-relative row form-group">
+                <label asp-for="tpenutupandetil.TANGGALMULAI" class="col-sm-2 col-form-label"></label>
+                <p style="color:red"> </p>
+                <div class="col-sm-9">
+                    <input asp-for="tpenutupandetil.TANGGALMULAI" class="form-control" type="date" data-toggle="datepicker-icon" />
+                    <span asp-validation-for="tpenutupandetil.TANGGALMULAI" class="text-danger"></span>
+                </div>
+            </div>
+
+            <div class="position-relative row form-group">
+                <label asp-for="tpenutupandetil.TANGGALAKHIR" class="col-sm-2 col-form-label"></label>
+                <p style="color:red"> </p>
+                <div class="col-sm-9">
+                    <input asp-for="tpenutupandetil.TANGGALAKHIR" class="form-control" type="date" data-toggle="datepicker-icon" />
+                    <span asp-validation-for="tpenutupandetil.TANGGALAKHIR" class="text-danger"></span>
+                </div>
+            </div>
+
+            <div class="position-relative row form-group">
+                <label class="col-sm-2 col-form-label"></label>
+                <p style="color:red">*</p>
+                <div class="col-sm-9">
+                    <input type="file" class="form-control" />
+                    <span class="text-danger"></span>
+                </div>
+            </div>
+
+            <div class="position-relative row form-check">
+                <div class="col-sm-9 offset-sm-2">
+                    <button class="btn btn-save pull-right">Simpan</button>
+                </div>
+        </form>
+    </div>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

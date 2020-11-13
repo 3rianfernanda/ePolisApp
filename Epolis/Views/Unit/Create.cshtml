@@ -1,0 +1,120 @@
+﻿@model Epolis.Models.Munit
+
+@{
+    ViewData["Title"] = "Create";
+}
+<div class="app-page-title">
+    <div class="page-title-wrapper">
+        <div class="page-title-heading">
+            <div class="page-title-icon">
+                <i class="pe-7s-medal icon-gradient bg-tempting-azure"></i>
+            </div>
+        </div>
+        <div class="page-title-heading">TAMBAH DATA UNIT</div>
+    </div>
+</div>
+<div class="main-card card col-12">
+    <div class="card-body">
+        <form asp-action="Create" autocomplete="off">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            @*<div class="position-relative row form-group">
+            <label asp-for="MUSERGROUPID" class="col-sm-2 col-form-label"></label>
+            <p style="color:red">*</p>
+            <div class="col-sm-9">
+                @Html.DropDownListFor(model => model.MUSERGROUPID, new SelectList(ViewBag.DDLGroup, "Value", "Text"), "Pilih Grup User", new { @class = "form-control" })
+                <span asp-validation-for="MUSERGROUPID" class="text-danger"></span>
+            </div>
+        </div>*@
+            <div class="position-relative row form-group">
+                <label asp-for="UNITCODE" class="col-sm-2 col-form-label"></label>
+                <p style="color:red">*</p>
+                <div class="col-sm-9">
+                    <input asp-for="UNITCODE" class="form-control" />
+                    <span asp-validation-for="UNITCODE" class="text-danger"></span>
+                </div>
+            </div>
+            <div class="position-relative row form-group">
+                <label asp-for="UNITNAME" class="col-sm-2 col-form-label"></label>
+                <p style="color:red">*</p>
+                <div class="col-sm-9">
+                    <input asp-for="UNITNAME" class="form-control" />
+                    <span asp-validation-for="UNITNAME" class="text-danger"></span>
+                </div>
+            </div>
+            @*<div class="position-relative row form-group">
+                <label asp-for="Code" class="col-sm-2 col-form-label"></label>
+                <p style="color:red">*</p>
+                <div class="col-sm-9">
+                    <input asp-for="Code" class="form-control" />
+                    <span asp-validation-for="Code" class="text-danger"></span>
+                </div>
+            </div>*@
+            <div class="position-relative row form-group">
+                <label asp-for="ADDRESS" class="col-sm-2 col-form-label"></label>
+                <p style="color:white">*</p>
+                <div class="col-sm-9">
+                    <input asp-for="ADDRESS" class="form-control" />
+                    <span asp-validation-for="ADDRESS" class="text-danger"></span>
+                </div>
+            </div>
+            <div class="position-relative row form-group">
+                <label asp-for="EMAIL" class="col-sm-2 col-form-label"></label>
+                <p style="color: white">*</p>
+                <div class="col-sm-9">
+                    <input asp-for="EMAIL" class="form-control" />
+                    <span asp-validation-for="EMAIL" class="text-danger"></span>
+                </div>
+            </div>
+            <div class="position-relative row form-group">
+                <label asp-for="TELEPON" class="col-sm-2 col-form-label"></label>
+                <p style="color: white">*</p>
+                <div class="col-sm-9">
+                    <input asp-for="TELEPON" class="form-control" />
+                    <span asp-validation-for="TELEPON" class="text-danger"></span>
+                </div>
+            </div>
+            <div class="position-relative row form-group">
+                <label class="col-sm-2 col-form-label">
+                    @Html.DisplayNameFor(model => model.ISACTIVE)
+                </label>
+                <p style="color:red">*</p>
+                <div class="col-sm-2">
+                    <select asp-for="ISACTIVE" class="form-control">
+                        <option value="True">Yes</option>
+                        <option value="False">No</option>
+                    </select>
+                    @*<input   />*@
+                    <span asp-validation-for="ISACTIVE" class="text-danger"></span>
+                </div>
+            </div>
+            <div class="position-relative row form-group" hidden>
+                <label asp-for="CREATEDBYID" class="col-sm-2 col-form-label"></label>
+                <p style="color:red"> </p>
+                <div class="col-sm-9">
+                    <input asp-for="CREATEDBYID" class="form-control" value="@DateTime.Now" />
+                    <span asp-validation-for="CREATEDBYID" class="text-danger"></span>
+                </div>
+            </div>
+            <div class="position-relative row form-group" hidden>
+                <label asp-for="CREATEDTIME" class="col-sm-2 col-form-label"></label>
+                <p style="color:red"> </p>
+                <div class="col-sm-9">
+                    <input asp-for="CREATEDTIME" class="form-control" />
+                    <span asp-validation-for="CREATEDTIME" class="text-danger"></span>
+                </div>
+            </div>
+            <div class="position-relative row form-check">
+                <div class="col-sm-9 offset-sm-2">
+                    <button class="btn btn-save pull-right">Simpan</button>
+                </div>
+            </div>
+        </form>
+        <a asp-action="Index" class="btn btn-dark pull-left">Kembali</a>
+    </div>
+</div>
+
+
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

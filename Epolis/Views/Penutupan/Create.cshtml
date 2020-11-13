@@ -1,0 +1,525 @@
+﻿@model Epolis.Models.SPenutupan
+@using Microsoft.AspNetCore.Http
+@using Microsoft.AspNetCore.Mvc;
+@using System.Drawing;
+@using System.Drawing.Imaging;
+@using System.IO;
+@inject Microsoft.AspNetCore.Hosting.IWebHostEnvironment env;
+
+@{
+    ViewData["Title"] = "Create";
+
+    ViewBag.UNITCODE = Context.Session.GetString("UNITCODE");
+    ViewBag.KOTACABANG = Context.Session.GetString("KOTACABANG");
+}
+<link href="~/lib/bootstrap/dist/css/bootstrap.css" rel="stylesheet" asp-append-version="true" />
+<link href="~/css/select2.min.css" rel="stylesheet" asp-append-version="true" />
+<style type="text/css">
+    .selectt {
+        color: #000000;
+        padding: 30px;
+        display: none;
+        margin-top: 30px;
+        width: 60%;
+        background: white
+    }
+
+    label {
+        margin-right: 20px;
+    }
+</style>
+
+<div class="app-page-title">
+    <div class="page-title-wrapper">
+        <div class="page-title-heading">
+            <div class="page-title-icon">
+                <i class="pe-7s-medal icon-gradient bg-tempting-azure"></i>
+            </div>
+        </div>
+        <div class="page-title-heading">TAMBAH DATA PENUTUPAN</div>
+    </div>
+</div>
+<form asp-action="Create" enctype="multipart/form-data" autocomplete="off">
+    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+    <div class="card-shadow-primary border mb-lg-5 card card-body border-primary">
+        <div class="position-relative row form-group">
+            <label class="col-sm-3 col-form-label">Kelompok Asuransi</label>
+            <p style="color:red">*</p>
+            <div class="col-sm-2">
+                <input type="radio" value="0" name="kelompok" checked>
+                <label>Kerugian</label>
+            </div>
+            <div class="col-sm-2">
+                <input type="radio" name="kelompok" value="1">
+                <label>Kredit</label>
+            </div>
+            <div class="col-sm-2">
+                <input type="radio" name="kelompok" value="2">
+                <label>Jiwa</label>
+            </div>
+        </div>
+
+        <h5 class="card-title">Perincian Order Penutupan</h5>
+        <div class="position-relative row form-group">
+            <label asp-for="penutupan.JENISPENUTUPAN" class="col-sm-3 col-form-label"></label>
+            <p style="color:red">*</p>
+            <div class="col-sm-2">
+                <input asp-for="penutupan.JENISPENUTUPAN" type="radio" value="0" checked>
+                <label>Ya</label>
+            </div>
+            <div class="col-sm-2">
+                <input asp-for="penutupan.JENISPENUTUPAN" type="radio" value="1">
+                <label>Tidak</label>
+            </div>
+        </div>
+        <div class="position-relative row form-group">
+            <label asp-for="penutupan.ISUPDATEPENUTUPANRENEWAL" class="col-sm-3 col-form-label"></label>
+            <p style="color:red">*</p>
+            <div class="col-sm-2">
+                <input asp-for="penutupan.ISUPDATEPENUTUPANRENEWAL" id="isrenewal1" type="radio" value="0" checked>
+                <label>Baru</label>
+            </div>
+            <div class="col-sm-3">
+                <input asp-for="penutupan.ISUPDATEPENUTUPANRENEWAL" id="isrenewal2" type="radio" value="1">
+                <label>Perpanjangan</label>
+            </div>
+        </div>
+        <div class="position-relative row form-group" id="divpolisold">
+            <label class="col-sm-3 col-form-label">No. Polis Lama</label>
+            <p style="color:red">*</p>
+            <div class="col-sm-8">
+                <input value="11201212000021" class="form-control" disabled />
+            </div>
+        </div>
+        <div class="position-relative row form-group">
+            <label asp-for="penutupan.NOREGPENUTUPAN" class="col-sm-3 col-form-label"></label>
+            <p style="color:red">*</p>
+            <div class="col-sm-8">
+                <input asp-for="penutupan.NOREGPENUTUPAN" class="form-control" />
+                <span asp-validation-for="penutupan.NOREGPENUTUPAN" class="text-danger"></span>
+            </div>
+        </div>
+        <div class="position-relative row form-group">
+            <label asp-for="penutupan.ORDERDARIKOTA" class="col-sm-3 col-form-label"></label>
+            <p style="color:white">*</p>
+            <div class="col-sm-8">
+                <input asp-for="penutupan.ORDERDARIKOTA" value="@ViewBag.KOTACABANG" class="form-control" readonly />
+                <span asp-validation-for="penutupan.ORDERDARIKOTA" class="text-danger"></span>
+            </div>
+        </div>
+        <div class="position-relative row form-group">
+            <label asp-for="penutupan.TGLINPUT" class="col-sm-3 col-form-label"></label>
+            <p style="color:white">*</p>
+            <div class="col-sm-8">
+                <input class="form-control" asp-for="penutupan.TGLINPUT" />
+                @*<input asp-for="penutupan.TGLINPUT" class="form-control" value="@DateTime.Now" hidden />*@
+                <span asp-validation-for="penutupan.TGLINPUT" class="text-danger"></span>
+            </div>
+        </div>
+        <div class="position-relative row form-group">
+            <label asp-for="penutupan.USERUNITBISNISID" class="col-sm-3 col-form-label"></label>
+            <p style="color:white">*</p>
+            <div class="col-sm-8">
+                <input asp-for="penutupan.USERUNITBISNISID" value="@ViewBag.UNITCODE" class="form-control" readonly />
+                <span asp-validation-for="penutupan.USERUNITBISNISID" class="text-danger"></span>
+            </div>
+        </div>
+        <div class="position-relative row form-group">
+            <label asp-for="penutupan.NOSKKNOW" class="col-sm-3 col-form-label"></label>
+            <p style="color:red">*</p>
+            <div class="col-sm-7">
+                <input asp-for="penutupan.NOSKKNOW" class="form-control" />
+                <span asp-validation-for="penutupan.NOSKKNOW" class="text-danger"></span>
+            </div>
+            <div col-sm-3>
+                <a id="getdata" class="btn pull-lefts" style="background-color: #006677;
+        color: #fff;
+        border-color: #4cae4c;">Get Data</a>
+            </div>
+        </div>
+        <div class="position-relative row form-group">
+            <label asp-for="penutupan.NOSKK" class="col-sm-3 col-form-label"></label>
+            <p style="color:white">*</p>
+            <div class="col-sm-8">
+                <input id="noskk" asp-for="penutupan.NOSKK" class="form-control" readonly />
+                <span asp-validation-for="penutupan.NOSKK" class="text-danger"></span>
+            </div>
+        </div>
+        <div class="position-relative row form-group">
+            <label asp-for="penutupan.CIF" class="col-sm-3 col-form-label"></label>
+            <p style="color:white">*</p>
+            <div class="col-sm-8">
+                <input id="cif" asp-for="penutupan.CIF" class="form-control" readonly />
+                <span asp-validation-for="penutupan.CIF" class="text-danger"></span>
+            </div>
+        </div>
+        <div class="position-relative row form-group">
+            <label asp-for="penutupan.tnasabahID" class="col-sm-3 col-form-label"></label>
+            <p style="color:white">*</p>
+            <div class="col-sm-8">
+                @*<input asp-for="penutupan.tnasabahID" class="form-control" readonly />*@
+                <input id="namanasabah" class="form-control" readonly />
+                <span asp-validation-for="penutupan.tnasabahID" class="text-danger"></span>
+            </div>
+        </div>
+        <div class="position-relative row form-group">
+            <label asp-for="penutupan.BANKERSCLAUSE" class="col-sm-3 col-form-label"></label>
+            <p style="color:red">*</p>
+            <div class="col-sm-2">
+                <input asp-for="penutupan.BANKERSCLAUSE" type="radio" value=true checked>
+                <label>Ya</label>
+            </div>
+            <div class="col-sm-2">
+                <input asp-for="penutupan.BANKERSCLAUSE" type="radio" value=false>
+                <label>Tidak</label>
+            </div>
+        </div>
+    </div>
+    <div class="card-shadow-primary border mb-lg-5 card card-body border-primary">
+        <h5 class="card-title">Permintaan Angsuran Pembayaran Premi</h5>
+        <div class="position-relative row form-group">
+            <label asp-for="penutupan.PEMBAYARAN" class="col-sm-3 col-form-label"></label>
+            <p style="color:red">*</p>
+            <div class="col-sm-8">
+                <select asp-for="penutupan.PEMBAYARAN" id="cbPaymenttype" class="form-control">
+                    <option>Pilih Pembayaran</option>
+                    <option value="Full">Full Payment</option>
+                    <option value="Installment">Installment</option>
+                    <option value="Partial">Partial Payment</option>
+                </select>
+                <span asp-validation-for="penutupan.PEMBAYARAN" class="text-danger"></span>
+            </div>
+        </div>
+        <div id="divCicilan" class="position-relative row form-group">
+            <label asp-for="penutupan.JUMLAHANGSURAN" class="col-sm-3 col-form-label"></label>
+            <p style="color:red">*</p>
+            <div class="col-sm-8">
+                <input asp-for="penutupan.JUMLAHANGSURAN" class="form-control" />
+                <span asp-validation-for="penutupan.JUMLAHANGSURAN" class="text-danger"></span>
+            </div>
+        </div>
+    </div>
+
+    <div class="card-shadow-primary border mb-lg-5 card card-body border-primary">
+        <h5 class="card-title">Jangka Waktu Pertanggungan</h5>
+        <div class="position-relative row form-group">
+            <label asp-for="penutupan.JANGKAWAKTUMULAI" class="col-sm-1 col-form-label"></label>
+            <p style="color:red">*</p>
+            <div class="col-sm-3">
+                <input asp-for="penutupan.JANGKAWAKTUMULAI" id="startperiod" class="form-control" type="date" data-toggle="datepicker-icon" />
+                <span asp-validation-for="penutupan.JANGKAWAKTUMULAI" class="text-danger"></span>
+            </div>
+            <label asp-for="penutupan.JANGKAWAKTUSELESAI" class="col-sm-1 col-form-label"></label>
+            <p style="color:red">*</p>
+            <div class="col-sm-3">
+                <input asp-for="penutupan.JANGKAWAKTUSELESAI" id="endperiod" class="form-control" type="date" data-toggle="datepicker-icon" />
+                <span asp-validation-for="penutupan.JANGKAWAKTUSELESAI" class="text-danger"></span>
+            </div>
+            <label asp-for="penutupan.PERIODEBULAN" class="col-sm-1 col-form-label"></label>
+            <p style="color:red">*</p>
+            <div class="col-sm-2">
+                <input asp-for="penutupan.PERIODEBULAN" id="period" class="form-control" readonly />
+                <span asp-validation-for="penutupan.PERIODEBULAN" class="text-danger"></span>
+            </div>
+        </div>
+        <div id="exampleAccordion" data-children=".item">
+            <div class="position-relative row form-group">
+                <label asp-for="penutupan.ISBROKER" class="col-sm-3 col-form-label"></label>
+                <p style="color:red">*</p>
+                <div class="col-sm-2">
+                    <input asp-for="penutupan.ISBROKER" aria-expanded="true" aria-controls="exampleAccordion1" data-toggle="collapse" href="#collapseExample" type="radio" id="asuransi" name="penutupan.ISBROKER" value=false checked>
+                    <label for="asuransi">Asuransi</label>
+                </div>
+                <div class="col-sm-2">
+                    <input asp-for="penutupan.ISBROKER" aria-expanded="false" aria-controls="exampleAccordion2" data-toggle="collapse" href="#collapseExample2" type="radio" id="broker" name="penutupan.ISBROKER" value=true>
+                    <label for="asuransi">Broker</label>
+                    <span asp-validation-for="penutupan.ISBROKER" class="text-danger"></span>
+                </div>
+            </div>
+
+            <div class="item">
+                <div data-parent="#exampleAccordion" id="collapseExample1" class="collapse show">
+                    <div class="card-shadow-primary border mb-sm-auto card card-body border-primary">
+                        <h5 class="card-title">Data Asuransi</h5>
+                        <div class="position-relative row form-group">
+                            <label class="col-sm-3 col-form-label">Jenis Asuransi</label>
+                            <p style="color:red">*</p>
+                            <div class="col-sm-7">
+                                @Html.DropDownListFor(model => model.jenisasuransi.JENISASURANSI, new SelectList(ViewBag.DDLJenisAsuransi, "Value", "Text"), "Pilih Jenis Asuransi", new { @class = "form-control", @id = "cbJenisAsuransi" })
+                                <span asp-validation-for="jenisasuransi.JENISASURANSI" class="text-danger"></span>
+                            </div>
+                        </div>
+                        <div class="position-relative row form-group">
+                            <label class="col-sm-3 col-form-label">Perusahaan Asuransi</label>
+                            <p style="color:red">*</p>
+                            <div class="col-sm-7">
+                                @Html.DropDownListFor(model => model.perusahaanasuransi.NAMAPERUSAHAAN, new SelectList(ViewBag.DDLPerusahaanAsuransi, "Value", "Text"), "Pilih Perusahaan Asuransi", new { @class = "form-control", @id = "cbAsuransi" })
+                                <span asp-validation-for="perusahaanasuransi.NAMAPERUSAHAAN" class="text-danger"></span>
+                            </div>
+                        </div>
+                        <div class="position-relative row form-group">
+                            <label class="col-sm-3 col-form-label">Alamat Asuradur</label>
+                            <p style="color:white">*</p>
+                            <div class="col-sm-7">
+                                <textarea asp-for="perusahaanasuransi.ALAMAT" id="asuransialamat" class="form-control" readonly></textarea>
+                            </div>
+                        </div>
+                        <div class="position-relative row form-group" id="divobjekpertanggungan">
+                            <label class="col-sm-3 col-form-label">Objek Pertanggungan</label>
+                            <p style="color:white">*</p>
+                            <div class="col-sm-7">
+                                <input class="form-control" />
+                            </div>
+                        </div>
+                        <div class="position-relative row form-group" id="divnamaokupasi">
+                            <label class="col-sm-3 col-form-label">Okupasi</label>
+                            <p style="color:red">*</p>
+                            <div class="col-sm-7">
+                                @Html.DropDownListFor(model => model.tpenutupandetil.NAMAOKUPASI, new SelectList(ViewBag.DDLOkupasi, "Value", "Text"), "Pilih Okupasi", new { @class = "form-control", @id = "cbOkupasi" })
+                                <span asp-validation-for="tpenutupandetil.NAMAOKUPASI" class="text-danger"></span>
+                                @*<input asp-for="tpenutupandetil.NAMAOKUPASI" class="form-control" />*@
+                            </div>
+                        </div>
+                        <div class="position-relative row form-group" id="divlokasipertanggungan">
+                            <label class="col-sm-3 col-form-label">Lokasi Objek Pertanggungan</label>
+                            <p style="color:red">*</p>
+                            <div class="col-sm-7">
+                                <input asp-for="tpenutupandetil.LOKASIOBJEKTERTANGGUNG" class="form-control" />
+                            </div>
+                        </div>
+                        <div class="position-relative row form-group" id="divkelas">
+                            <label class="col-sm-3 col-form-label">Kelas Konstruksi</label>
+                            <p style="color:red">*</p>
+                            <div class="col-sm-1">
+                                <input asp-for="tpenutupandetil.KELAS" class="form-control" />
+                            </div>
+                        </div>
+                        <div class="position-relative row form-group" id="divvaluta">
+                            <label class="col-sm-3 col-form-label">Valuta</label>
+                            <p style="color:white">*</p>
+                            <div class="col-sm-2">
+                                <select asp-for="tpenutupandetil.MATAUANG" class="form-control">
+                                    <option value="IDR">IDR</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="position-relative row form-group" id="divnilaitaksasi">
+                            <label class="col-sm-3 col-form-label">Nilai Taksasi</label>
+                            <p style="color:red">*</p>
+                            <div class="col-sm-7">
+                                <input asp-for="tpenutupandetil.TAKSASI" class="form-control" />
+                            </div>
+                        </div>
+
+                        <div class="position-relative row form-group" id="divkodeperluasan">
+                            <label class="col-sm-3 col-form-label">Perluasan Jaminan</label>
+                            <p style="color:red">*</p>
+                            <div class="col-sm-7">
+                                <input asp-for="tperluasan.KODEPERLUASAN" class="form-control" />
+                            </div>
+                        </div>
+
+                        <div class="position-relative row form-group" id="divnilaipertanggungan">
+                            <label class="col-sm-3 col-form-label">Nilai Pertanggungan (TSI)</label>
+                            <p style="color:red">*</p>
+                            <div class="col-sm-7">
+                                <input asp-for="tpertanggungan.NILAIPERTANGGUNGAN" class="form-control" />
+                            </div>
+                        </div>
+
+                        <div class="position-relative row form-group" id="divnilaipertanggungan">
+                            <label class="col-sm-3 col-form-label">Catatan</label>
+                            <p style="color:red">*</p>
+                            <div class="col-sm-7">
+                                <textarea asp-for="penutupan.CATATAN" class="form-control"></textarea>
+                            </div>
+                        </div>
+
+                        <div class="form-group" id="divokupasirenewal">
+                            <table style="width: 100%;" id="table" class="table table-bordered table-hover">
+                                <thead>
+                                    <tr>
+                                        <td align="center"><label style="color: white">No</label></td>
+                                        <td align="center"><label style="color: white">Nama Obyek Pertanggungan</label></td>
+                                        <td align="center"><label style="color: white">Nilai Pertanggungan</label></td>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                    </tr>
+                                </tbody>
+                                <tfoot>
+                                    <tr>
+                                        <td></td>
+                                        <td><label style="color: white">Total TSI / Nilai Pertanggungan</label></td>
+                                        <td></td>
+                                    </tr>
+                                </tfoot>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="card-shadow-primary border mb-lg-5 card card-body border-primary">
+        <h5 class="card-title">Dokumen</h5>
+        <input type="file" name="files" multiple required class="form-control-file" />
+        <input type="text" autocomplete="off" placeholder="Enter File Description" asp-for="tfile.Description" required class="form-control" />
+        <span asp-validation-for="tfile.Description" class="text-danger"></span>
+        <br />
+        <button class="col-2 btn pull-left" style="background-color: #006677;
+        color: #fff;
+        border-color: #4cae4c;">
+            Simpan
+        </button>
+    </div>
+    @*<div class="card-footer">
+            <div class="position-relative row form-check">
+                <div class="col-sm-9 offset-sm-2">
+
+                </div>
+            </div>
+        </div>*@
+</form>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="~/js/select2.min.js" asp-append-version="true"></script>
+    <script type="text/javascript">
+    debugger;
+        $(document).ready(function () {
+            $('input[type="radio"]').click(function () {
+                var inputValue = $(this).attr("id");
+                var targetBox = $("." + inputValue);
+                $(".selectt").not(targetBox).hide();
+                $(targetBox).show();
+            });
+            $(function () {
+                $(".datepicker").datepicker(
+                    { dateFormat: 'dd-MM-yyyy' });
+            });
+            $("#divCicilan").hide();
+            $("#cbPaymenttype").change(function () {
+                var paymentType = $(this).find('option:selected').val();
+                if (paymentType != "Full") {
+                    $("#divCicilan").slideDown();
+                } else {
+                    $("#divCicilan").slideUp();
+                }
+            });
+
+            $("#cbAsuransi").change(function () {
+
+                var asuransi = $(this).find('option:selected').val();
+                $.ajax({
+                        type: 'GET',
+                    url: '@Url.Action("GetAsuransiAddress", "Penutupan")' + '?id=' + asuransi,
+                    success: function (data) {
+                        $("#asuransialamat").val(data);
+                        }
+                    });
+            });
+
+            $("#getdata").click(function () {
+                console.log("Masuk event.");
+                  $.ajax({
+                    url: "http://localhost:9999/api/getdata/LoadData",
+                    type: "POST",
+                    data: JSON.stringify({ "id": 1, "filter": "0=0" }),
+                    contentType: "application/json; charset=utf-8",
+                    dataType: "json",
+                    success: function (data) {
+                        console.log(data);
+                        $("#noskk").val(data.data.temp.noskk);
+                        $("#cif").val(data.data.temp.cif);
+                        $("#namanasabah").val(data.data.temp.namadebitur);
+                    },
+                    error: function (xhr, status, error) {
+                        $("#cif").val("Error");
+                    }
+                })
+
+            });
+
+            $('#divpolisold').hide();
+            $('#divokupasirenewal').hide();
+            $("#isrenewal1, #isrenewal2").change(function () {
+                if ($("#isrenewal1").is(":checked")) {
+                    $('#divpolisold').hide();
+                    $('#divokupasirenewal').hide();
+                    $('#divnilaipertanggungan').show();
+                    $('#divkodeperluasan').show();
+                    $('#divnilaitaksasi').show();
+                    $('#divvaluta').show();
+                    $('#divkelas').show();
+                    $('#divlokasipertanggungan').show();
+                    $('#divnamaokupasi').show();
+                    $('#divobjekpertanggungan').show();
+                }
+                else if ($("#isrenewal2").is(":checked")) {
+                    $('#divpolisold').show();
+                    $('#divokupasirenewal').show();
+                    $('#divnilaipertanggungan').hide();
+                    $('#divkodeperluasan').hide();
+                    $('#divnilaitaksasi').hide();
+                    $('#divvaluta').hide();
+                    $('#divkelas').hide();
+                    $('#divlokasipertanggungan').hide();
+                    $('#divnamaokupasi').hide();
+                    $('#divobjekpertanggungan').hide();
+                }
+            });
+            $("#startperiod").change(function () {
+                if ($("#startperiod").val() != null && $("#endperiod").val() != null) {
+                    if ($("#startperiod").val() > $("#endperiod").val()) {
+                        $("#endperiod").val($("#startperiod").val());
+                    }
+                    if ($("#startperiod").val() != null) {
+                        $("#endperiod").attr("min", $("#startperiod").val());
+                    }
+                    var days = daysdifference($("#startperiod").val(), $("#endperiod").val());
+                    $("#period").val(Math(days / 30.5));
+                }
+            });
+
+            $("#endperiod").change(function () {
+                if ($("#startperiod").val() != null) {
+                    $("#endperiod").attr("min", $("#startperiod").val());
+                }
+                if ($("#startperiod").val() != null && $("#endperiod").val() != null) {
+                    if ($("#startperiod").val() > null && $("#endperiod").val()) {
+                        $("#endperiod").val($("#startperiod").val());
+                    }
+                    var days = daysdifference($("#startperiod").val(), $("#endperiod").val());
+                    $("#period").val(Math(days / 30.5));
+                }
+            });
+
+        });
+
+        function daysdifference(firstDate, secondDate) {
+            var startDay = new Date(firstDate);
+            var endDay = new Date(secondDate);
+            var millisBetween = startDay.getTime() - endDay.getTime();
+            var days = millisBetween / (1000 * 3600 * 24);
+            return Math.round(Math.abs(days));
+        }
+
+    </script>
+    <script>
+       // $(document).ready(function () { $("#cbAsuransi").select2({ multiple: true }); });
+        $(document).ready(function () {
+            $("#cbAsuransi").select2();
+            $("#cbJenisAsuransi").select2();
+            $("#cbOkupasi").select2();
+        });
+    </script>
+
+}
+

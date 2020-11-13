@@ -1,0 +1,66 @@
+﻿@model Epolis.Models.Msysparam
+
+@{
+    ViewData["Title"] = "Details";
+}
+<div class="app-page-title">
+    <div class="page-title-wrapper">
+        <div class="page-title-heading">
+            <div class="page-title-icon">
+                <i class="pe-7s-medal icon-gradient bg-tempting-azure"></i>
+            </div>
+        </div>
+        <div class="page-title-heading">DETAIL DATA SYSTEM PARAMETER</div>
+    </div>
+</div>
+<div class="main-card card col-12">
+    <div class="card-body">
+        <br />
+        <dl class="row">
+            <dt class="col-sm-2">
+                @Html.DisplayNameFor(model => model.PARAMCODE)
+            </dt>
+            <dd class="col-sm-10">
+                @Html.DisplayFor(model => model.PARAMCODE)
+            </dd>
+            <dt class="col-sm-2">
+                @Html.DisplayNameFor(model => model.PARAMNAME)
+            </dt>
+            <dd class="col-sm-10">
+                @Html.DisplayFor(model => model.PARAMNAME)
+            </dd>
+            <dt class="col-sm-2">
+                @Html.DisplayNameFor(model => model.PARAMVALUE)
+            </dt>
+            <dd class="col-sm-10">
+                @Html.DisplayFor(model => model.PARAMVALUE)
+            </dd>
+            <dt class="col-sm-2">
+                @Html.DisplayNameFor(model => model.PARAMDESC)
+            </dt>
+            <dd class="col-sm-10">
+                @Html.DisplayFor(model => model.PARAMDESC)
+            </dd>
+            @*<dt class="col-sm-2">
+                @Html.DisplayNameFor(model => model.ISMASKED)
+            </dt>
+            <dd class="col-sm-10">
+                @Html.DisplayFor(model => model.ISMASKED)
+            </dd>*@
+            <dt class="col-sm-2">
+                @Html.DisplayNameFor(model => model.PARAMGROUP)
+            </dt>
+            <dd class="col-sm-10">
+                @Html.DisplayFor(model => model.PARAMGROUP)
+            </dd>
+            <dt class="col-sm-2">
+                @Html.DisplayNameFor(model => model.ORDERNO)
+            </dt>
+            <dd class="col-sm-10">
+                @Html.DisplayFor(model => model.ORDERNO)
+            </dd>
+        </dl>
+    </div>
+    <a asp-action="Index" class="btn btn-dark pull-left">Tutup</a>
+    <br />
+</div>

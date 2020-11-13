@@ -1,0 +1,253 @@
+﻿@model Epolis.Models.Tpenutupan
+
+@{
+    ViewData["Title"] = "Details";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@*<script src="https://code.jquery.com/jquery-1.12.4.min.js"></script>*@
+<link href="~/lib/bootstrap//dist/css/bootstrap.css" rel="stylesheet" asp-append-version="true" />
+<style type="text/css">
+    .selectt {
+        color: #000000;
+        padding: 30px;
+        display: none;
+        margin-top: 30px;
+        width: 60%;
+        background: white
+    }
+
+    label {
+        margin-right: 20px;
+    }
+</style>
+
+<div class="app-page-title">
+    <div class="page-title-wrapper">
+        <div class="page-title-heading">
+            <div class="page-title-icon">
+                <i class="pe-7s-medal icon-gradient bg-tempting-azure"></i>
+            </div>
+        </div>
+        <div class="page-title-heading">DETIL DATA PENUTUPAN</div>
+    </div>
+</div>
+<form asp-action="CetakSertifikat" autocomplete="off">
+    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+    <div class="card-shadow-primary border mb-lg-5 card card-body border-primary">
+        <h5 class="card-title">Perincian Order Penutupan</h5>
+        <div class="position-relative row form-group">
+            <label asp-for="JENISPENUTUPAN" class="col-sm-3 col-form-label"></label>
+            <p style="color:red">*</p>
+            <div class="col-sm-2">
+                <input asp-for="JENISPENUTUPAN" type="radio" value="0" readonly>
+                <label>Ya</label>
+            </div>
+            <div class="col-sm-2">
+                <input asp-for="JENISPENUTUPAN" type="radio" value="1" readonly>
+                <label>Tidak</label>
+            </div>
+        </div>
+        <div class="position-relative row form-group">
+            <label asp-for="ID" class="col-sm-3 col-form-label" hidden></label>
+            <div class="col-sm-8">
+                <input asp-for="ID" class="form-control" hidden/>
+                <span asp-validation-for="ID" class="text-danger" hidden></span>
+            </div>
+        </div>
+        <div class="position-relative row form-group">
+            <label asp-for="ISUPDATEPENUTUPANRENEWAL" class="col-sm-3 col-form-label"></label>
+            <p style="color:red">*</p>
+            <div class="col-sm-2">
+                <input asp-for="ISUPDATEPENUTUPANRENEWAL" type="radio" value="0" readonly>
+                <label>Baru</label>
+            </div>
+            <div class="col-sm-2">
+                <input asp-for="ISUPDATEPENUTUPANRENEWAL" type="radio" value="1" readonly>
+                <label>Perpanjangan</label>
+            </div>
+        </div>
+        <div class="position-relative row form-group">
+            <label asp-for="NOREGPENUTUPAN" class="col-sm-3 col-form-label"></label>
+            <p style="color:red">*</p>
+            <div class="col-sm-8">
+                <input asp-for="NOREGPENUTUPAN" class="form-control" readonly />
+                <span asp-validation-for="NOREGPENUTUPAN" class="text-danger"></span>
+            </div>
+        </div>
+        <div class="position-relative row form-group">
+            <label asp-for="ORDERDARIKOTA" class="col-sm-3 col-form-label"></label>
+            <p style="color:white">*</p>
+            <div class="col-sm-8">
+                <input asp-for="ORDERDARIKOTA" class="form-control" readonly />
+                <span asp-validation-for="ORDERDARIKOTA" class="text-danger"></span>
+            </div>
+        </div>
+        <div class="position-relative row form-group">
+            <label asp-for="TGLINPUT" class="col-sm-3 col-form-label"></label>
+            <p style="color:white">*</p>
+            <div class="col-sm-8">
+                <input asp-for="TGLINPUT" class="form-control" readonly />
+                <span asp-validation-for="TGLINPUT" class="text-danger"></span>
+            </div>
+        </div>
+        <div class="position-relative row form-group">
+            <label asp-for="USERUNITBISNISID" class="col-sm-3 col-form-label"></label>
+            <p style="color:white">*</p>
+            <div class="col-sm-8">
+                <input asp-for="USERUNITBISNISID" class="form-control" readonly />
+                <span asp-validation-for="USERUNITBISNISID" class="text-danger"></span>
+            </div>
+        </div>
+        <div class="position-relative row form-group">
+            <label asp-for="NOSKKNOW" class="col-sm-3 col-form-label"></label>
+            <p style="color:red">*</p>
+            <div class="col-sm-7">
+                <input asp-for="NOSKKNOW" class="form-control" readonly />
+                <span asp-validation-for="NOSKKNOW" class="text-danger"></span>
+            </div>
+        </div>
+        <div class="position-relative row form-group">
+            <label asp-for="NOSKK" class="col-sm-3 col-form-label"></label>
+            <p style="color:white">*</p>
+            <div class="col-sm-8">
+                <input asp-for="NOSKK" class="form-control" readonly />
+                <span asp-validation-for="NOSKK" class="text-danger"></span>
+            </div>
+        </div>
+        <div class="position-relative row form-group">
+            <label asp-for="CIF" class="col-sm-3 col-form-label"></label>
+            <p style="color:white">*</p>
+            <div class="col-sm-8">
+                <input asp-for="CIF" class="form-control" readonly />
+                <span asp-validation-for="CIF" class="text-danger"></span>
+            </div>
+        </div>
+        <div class="position-relative row form-group">
+            <label asp-for="tnasabahID" class="col-sm-3 col-form-label"></label>
+            <p style="color:white">*</p>
+            <div class="col-sm-8">
+                <input asp-for="tnasabahID" class="form-control" readonly />
+                <span asp-validation-for="tnasabahID" class="text-danger"></span>
+            </div>
+        </div>
+        <div class="position-relative row form-group">
+            <label asp-for="BANKERSCLAUSE" class="col-sm-3 col-form-label"></label>
+            <p style="color:red">*</p>
+            <div class="col-sm-2">
+                <input asp-for="BANKERSCLAUSE" type="radio" value=true checked>
+                <label>Ya</label>
+            </div>
+            <div class="col-sm-2">
+                <input asp-for="BANKERSCLAUSE" type="radio" value=false>
+                <label>Tidak</label>
+            </div>
+        </div>
+    </div>
+    <div class="card-shadow-primary border mb-lg-5 card card-body border-primary">
+        <h5 class="card-title">Permintaan Angsuran Pembayaran Premi</h5>
+        <div class="position-relative row form-group">
+            <label asp-for="PEMBAYARAN" class="col-sm-3 col-form-label"></label>
+            <p style="color:red">*</p>
+            <div class="col-sm-8">
+                <input asp-for="PEMBAYARAN" class="form-control" readonly />
+            </div>
+        </div>
+        <div class="position-relative row form-group">
+            <label asp-for="JUMLAHANGSURAN" class="col-sm-3 col-form-label"></label>
+            <p style="color:red">*</p>
+            <div class="col-sm-8">
+                <input asp-for="JUMLAHANGSURAN" class="form-control" readonly />
+                <span asp-validation-for="JUMLAHANGSURAN" class="text-danger"></span>
+            </div>
+        </div>
+    </div>
+
+    <div class="card-shadow-primary border mb-lg-5 card card-body border-primary">
+        <h5 class="card-title">Jangka Waktu Pertanggungan</h5>
+        <div class="position-relative row form-group">
+            <label asp-for="JANGKAWAKTUMULAI" class="col-sm-1 col-form-label"></label>
+            <p style="color:red">*</p>
+            <div class="col-sm-3">
+                <input asp-for="JANGKAWAKTUMULAI" class="form-control" type="date" data-toggle="datepicker-icon" readonly />
+                <span asp-validation-for="JANGKAWAKTUMULAI" class="text-danger"></span>
+            </div>
+            <label asp-for="JANGKAWAKTUSELESAI" class="col-sm-1 col-form-label"></label>
+            <p style="color:red">*</p>
+            <div class="col-sm-3">
+                <input asp-for="JANGKAWAKTUSELESAI" class="form-control" type="date" data-toggle="datepicker-icon" readonly />
+                <span asp-validation-for="JANGKAWAKTUSELESAI" class="text-danger"></span>
+            </div>
+            <label asp-for="PERIODEBULAN" class="col-sm-1 col-form-label"></label>
+            <p style="color:red">*</p>
+            <div class="col-sm-2">
+                <input asp-for="PERIODEBULAN" class="form-control" readonly />
+                <span asp-validation-for="PERIODEBULAN" class="text-danger"></span>
+            </div>
+        </div>
+        <div id="exampleAccordion" data-children=".item">
+            <div class="position-relative row form-group">
+                <label asp-for="ISBROKER" class="col-sm-3 col-form-label"></label>
+                <p style="color:red">*</p>
+                <div class="col-sm-2">
+                    <input asp-for="ISBROKER" aria-expanded="true" aria-controls="exampleAccordion1" data-toggle="collapse" href="#collapseExample" type="radio" id="asuransi" name="ISBROKER" value=false checked>
+                    <label for="asuransi">Asuransi</label>
+                </div>
+            </div>
+            <div class="item">
+                <div data-parent="#exampleAccordion" id="collapseExample1" class="collapse show">
+                    <div class="card-shadow-primary border mb-sm-auto card card-body border-primary">
+                        <h5 class="card-title">Data Asuransi</h5>
+                        <div class="position-relative row form-group">
+                            <label class="col-sm-3 col-form-label">Kelompok Asuransi</label>
+                            <p style="color:red">*</p>
+                            <div class="col-sm-7">
+                                <input value="Resiko" class="form-control" readonly />
+                            </div>
+                        </div>
+
+                        <div class="position-relative row form-group">
+                            <label class="col-sm-3 col-form-label">Jenis Asuransi</label>
+                            <p style="color:red">*</p>
+                            <div class="col-sm-7">
+                                <input value="FR" class="form-control" readonly />
+                            </div>
+                        </div>
+                        <div class="position-relative row form-group">
+                            <label class="col-sm-3 col-form-label">Perusahaan Asuransi</label>
+                            <p style="color:red">*</p>
+                            <div class="col-sm-7">
+                                <input value="ASURANSI TAKAFUL UMUM" class="form-control" readonly />
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+            <br />
+            @*<a asp-action="CetakSertifikat" asp-route-id="ID" class="btn btn-primary fa fa-print">Cetak</a>*@
+            <button asp-action="CetakSertifikat" value="Cetak" class="btn btn-primary fa fa-print pull-right">Cetak</button>
+        </div>
+</form>
+
+<script type="text/javascript">
+    $(document).ready(function () {
+        $('input[type="radio"]').click(function () {
+            var inputValue = $(this).attr("id");
+            var targetBox = $("." + inputValue);
+            $(".selectt").not(targetBox).hide();
+            $(targetBox).show();
+        });
+        $(function () {
+            $(".datepicker").datepicker(
+                { dateFormat: 'dd-MM-yyyy' });
+        });
+    });
+
+</script>
+<script src="~/lib/jquery/dist/jquery.min.js"></script>
+<script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

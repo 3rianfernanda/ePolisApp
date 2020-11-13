@@ -1,0 +1,172 @@
+﻿@model Epolis.Models.Tbroker
+
+@{
+    ViewData["Title"] = "Delete";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Delete</h2>
+
+<h3>Are you sure you want to delete this?</h3>
+<div>
+    <h4>Tbroker</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.MBROKERID)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.MBROKERID)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.MPERUSAHAANASURANSIID)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.MPERUSAHAANASURANSIID)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.MJENISASURANSIID)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.MJENISASURANSIID)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.MOKUPASIID)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.MOKUPASIID)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.NAMABROKER)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.NAMABROKER)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.ALAMATBROKER)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.ALAMATBROKER)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.EMAILBROKER)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.EMAILBROKER)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.TELEPONBROKER)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.TELEPONBROKER)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.NAMAASURADUR)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.NAMAASURADUR)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.ALAMATASURADUR)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.ALAMATASURADUR)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.EMAILASURADUR)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.EMAILASURADUR)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.TELEPONASURADUR)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.TELEPONASURADUR)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.CONTACTPERSONASURADUR)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.CONTACTPERSONASURADUR)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.NOMINALCBC)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.NOMINALCBC)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.RESIKO)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.RESIKO)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.TANGGALMULAI)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.TANGGALMULAI)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.TANGGALSELESAI)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.TANGGALSELESAI)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.UPDATEDBYID)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.UPDATEDBYID)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.UPDATEDTIME)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.UPDATEDTIME)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.ISDELETED)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.ISDELETED)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.DELETEDBYID)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.DELETEDBYID)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.DELETEDTIME)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.DELETEDTIME)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.CREATEDTIME)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.CREATEDTIME)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.CREATEDBYID)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.CREATEDBYID)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.ISACTIVED)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.ISACTIVED)
+        </dd>
+    </dl>
+    
+    <form asp-action="Delete">
+        <input type="hidden" asp-for="ID" />
+        <input type="submit" value="Delete" class="btn btn-default" /> |
+        <a asp-action="Index">Back to List</a>
+    </form>
+</div>

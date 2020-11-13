@@ -1,0 +1,37 @@
+﻿@model Epolis.Models.Mjenisasuransi
+
+@{
+    ViewData["Title"] = "Details";
+}
+
+<div class="app-page-title">
+    <div class="page-title-wrapper">
+        <div class="page-title-heading">
+            <div class="page-title-icon">
+                <i class="pe-7s-medal icon-gradient bg-tempting-azure"></i>
+            </div>
+        </div>
+        <div class="page-title-heading">DETAIL DATA JENIS ASURANSI</div>
+    </div>
+</div>
+<div class="main-card card col-12">
+    <div class="card-body">
+        <br />
+        <dl class="row">
+            <dt class="col-sm-2">
+                @Html.DisplayNameFor(model => model.KODEJENISASURANSI)
+            </dt>
+            <dd class="col-sm-10">
+                @Html.DisplayFor(model => model.KODEJENISASURANSI)
+            </dd>
+            <dt class="col-sm-2">
+                @Html.DisplayNameFor(model => model.JENISASURANSI)
+            </dt>
+            <dd class="col-sm-10">
+                @Html.DisplayFor(model => model.JENISASURANSI)
+            </dd>
+        </dl>
+    </div>
+    <a asp-action="Index" class="btn btn-dark pull-left">Tutup</a>
+    <br />
+</div>

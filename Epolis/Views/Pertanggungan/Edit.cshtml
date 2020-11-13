@@ -1,0 +1,90 @@
+﻿@model Epolis.Models.Mpertanggungan
+
+@{
+    ViewData["Title"] = "Edit";
+}
+<div class="app-page-title">
+    <div class="page-title-wrapper">
+        <div class="page-title-heading">
+            <div class="page-title-icon">
+                <i class="pe-7s-medal icon-gradient bg-tempting-azure"></i>
+            </div>
+        </div>
+        <div class="page-title-heading">UBAH DATA PERTANGGUNGAN</div>
+    </div>
+</div>
+<div class="main-card card col-12">
+    <div class="card-body">
+        <form asp-action="Edit" autocomplete="off">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input type="hidden" asp-for="ID" />
+            <div class="position-relative row form-group">
+                <label asp-for="MOKUPASIID" class="col-sm-2 col-form-label"></label>
+                <p style="color:red">*</p>
+                <div class="col-sm-9">
+                    @Html.DropDownListFor(model => model.MOKUPASIID, new SelectList(ViewBag.DDLOkupasi, "Value", "Text"), "Pilih Okupasi", new { @class = "form-control" })
+                    <span asp-validation-for="MOKUPASIID" class="text-danger"></span>
+                </div>
+            </div>
+            <div class="position-relative row form-group">
+                <label asp-for="KODEPERTANGGUNGAN" class="col-sm-2 col-form-label"></label>
+                <p style="color:red">*</p>
+                <div class="col-sm-9">
+                    <input asp-for="KODEPERTANGGUNGAN" class="form-control" />
+                    <span asp-validation-for="KODEPERTANGGUNGAN" class="text-danger"></span>
+                </div>
+            </div>
+            <div class="position-relative row form-group">
+                <label asp-for="DESKRIPSI" class="col-sm-2 col-form-label"></label>
+                <p style="color:red">*</p>
+                <div class="col-sm-9">
+                    <input asp-for="DESKRIPSI" class="form-control" />
+                    <span asp-validation-for="DESKRIPSI" class="text-danger"></span>
+                </div>
+            </div>
+            @*<div class="position-relative row form-group">
+                <label asp-for="RATEPERTANGGUNGAN" class="col-sm-2 col-form-label"></label>
+                <p style="color:red">*</p>
+                <div class="col-sm-9">
+                    <input asp-for="RATEPERTANGGUNGAN" class="form-control" />
+                    <span asp-validation-for="RATEPERTANGGUNGAN" class="text-danger"></span>
+                </div>
+            </div>*@
+            @*<div class="position-relative row form-group">
+                <label asp-for="RESIKO" class="col-sm-2 col-form-label"></label>
+                <p style="color:red">*</p>
+                <div class="col-sm-9">
+                    @Html.DropDownListFor(model => model.RESIKO, new SelectList(ViewBag.DDLResiko, "Value", "Text"), "Pilih Resiko", new { @class = "form-control" })
+                    <span asp-validation-for="RESIKO" class="text-danger"></span>
+                </div>
+            </div>*@
+            <div class="position-relative row form-group" hidden>
+                <label asp-for="UPDATEDTIME" class="col-sm-2 col-form-label"></label>
+                <p style="color:red"> </p>
+                <div class="col-sm-9">
+                    <input asp-for="UPDATEDTIME" class="form-control" value="@DateTime.Now" />
+                    <span asp-validation-for="UPDATEDTIME" class="text-danger"></span>
+                </div>
+            </div>
+            <div class="position-relative row form-group" hidden>
+                <label asp-for="UPDATEDBYID" class="col-sm-2 col-form-label"></label>
+                <p style="color:red"> </p>
+                <div class="col-sm-9">
+                    <input asp-for="UPDATEDBYID" class="form-control" />
+                    <span asp-validation-for="UPDATEDBYID" class="text-danger"></span>
+                </div>
+            </div>
+            <div class="position-relative row form-check">
+                <div class="col-sm-9 offset-sm-2">
+                    <button class="btn btn-save pull-right">Simpan</button>
+                </div>
+            </div>
+        </form>
+        <a asp-action="Index" class="btn btn-dark pull-left">Kembali</a>
+    </div>
+</div>
+
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

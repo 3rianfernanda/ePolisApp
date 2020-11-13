@@ -1,0 +1,67 @@
+﻿@model Epolis.Models.Munit
+
+@{
+    ViewData["Title"] = "Details";
+}
+
+<div class="app-page-title">
+    <div class="page-title-wrapper">
+        <div class="page-title-heading">
+            <div class="page-title-icon">
+                <i class="pe-7s-medal icon-gradient bg-tempting-azure"></i>
+            </div>
+        </div>
+        <div class="page-title-heading">DETAIL DATA UNIT</div>
+    </div>
+</div>
+<div class="main-card card col-12">
+    <div class="card-body">
+        <br />
+        <dl class="row">
+            @*<dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.MUSERGROUPID)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.MUSERGROUPID)
+        </dd>*@
+            <dt class="col-sm-2">
+                @Html.DisplayNameFor(model => model.UNITCODE)
+            </dt>
+            <dd class="col-sm-10">
+                @Html.DisplayFor(model => model.UNITCODE)
+            </dd>
+            <dt class="col-sm-2">
+                @Html.DisplayNameFor(model => model.UNITNAME)
+            </dt>
+            <dd class="col-sm-10">
+                @Html.DisplayFor(model => model.UNITNAME)
+            </dd>
+            <dt class="col-sm-2">
+                @Html.DisplayNameFor(model => model.ADDRESS)
+            </dt>
+            <dd class="col-sm-10">
+                @Html.DisplayFor(model => model.ADDRESS)
+            </dd>
+            <dt class="col-sm-2">
+                @Html.DisplayNameFor(model => model.EMAIL)
+            </dt>
+            <dd class="col-sm-10">
+                @Html.DisplayFor(model => model.EMAIL)
+            </dd>
+            <dt class="col-sm-2">
+                @Html.DisplayNameFor(model => model.TELEPON)
+            </dt>
+            <dd class="col-sm-10">
+                @Html.DisplayFor(model => model.TELEPON)
+            </dd>
+            <dt class="col-sm-2">
+                @Html.DisplayNameFor(model => model.ISACTIVE)
+            </dt>
+            <dd class="col-sm-10">
+                @Html.DisplayFor(model => model.ISACTIVE)
+            </dd>
+        </dl>
+    </div>
+    <a asp-action="Index" class="btn btn-dark pull-left">Tutup</a>
+    <br />
+</div>

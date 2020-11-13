@@ -1,0 +1,84 @@
+﻿@model IEnumerable<Epolis.Models.ViewModelPenutupan>
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="app-page-title">
+    <div class="page-title-wrapper">
+        <div class="page-title-heading">
+            <div class="page-title-icon">
+                <i class="pe-7s-medal icon-gradient bg-tempting-azure"></i>
+            </div>
+        </div>
+        <div class="page-title-heading">Daftar Approval Data Penutupan</div>
+    </div>
+</div>
+<div class="main-card card col-12">
+    <div class="card-body">
+        <br />
+        <table style="width: 100%;" id="table" class="table table-bordered table-hover">
+            <thead>
+                <tr>
+                    <th>
+                        No.
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Tpenutupan.tnasabahID)
+                    </th>
+                    <th>
+                        Jenis Asuransi
+                    </th>
+                    <th>
+                        No. Order Penutupan
+                    </th>
+                    <td>
+                       Order Dari Kota
+                    </td>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Tpenutupan.TGLINPUT)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Tpenutupan.STATUS)
+                    </th>
+                    <th>Action</th>
+                </tr>
+            </thead>
+            <tbody>
+                @{
+                    int no = 0;
+                }
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td style="text-align:center">
+                            @{ no++; }
+                            @no
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Tnasabah.NAMA)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Tpenutupan.JENISPENUTUPAN)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Tpenutupan.NOREGPENUTUPAN)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Tpenutupan.ORDERDARIKOTA)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Tpenutupan.TGLINPUT)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Mlookup.VALUE)
+                        </td>
+                        <td>
+                            <a asp-action="Approval" asp-route-id="@item.Tpenutupan.ID">Approval</a>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</div>

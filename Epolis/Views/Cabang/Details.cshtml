@@ -1,0 +1,80 @@
+﻿@model Epolis.Models.Mcabang
+
+@{
+    ViewData["Title"] = "Details";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="app-page-title">
+    <div class="page-title-wrapper">
+        <div class="page-title-heading">
+            <div class="page-title-icon">
+                <i class="pe-7s-medal icon-gradient bg-tempting-azure"></i>
+            </div>
+        </div>
+        <div class="page-title-heading">DETAIL DATA CABANG</div>
+    </div>
+</div>
+<div class="main-card card col-12">
+    <div class="card-body">
+        <br />
+        <dl class="row">
+            <dt class="col-sm-2">
+                @Html.DisplayNameFor(model => model.KODECABANG)
+            </dt>
+            <dd class="col-sm-10">
+                @Html.DisplayFor(model => model.KODECABANG)
+            </dd>
+            <dt class="col-sm-2">
+                @Html.DisplayNameFor(model => model.NAMACABANG)
+            </dt>
+            <dd class="col-sm-10">
+                @Html.DisplayFor(model => model.NAMACABANG)
+            </dd>
+            <dt class="col-sm-2">
+                @Html.DisplayNameFor(model => model.ALAMATCABANG)
+            </dt>
+            <dd class="col-sm-10">
+                @Html.DisplayFor(model => model.ALAMATCABANG)
+            </dd>
+            <dt class="col-sm-2">
+                @Html.DisplayNameFor(model => model.KOTACABANG)
+            </dt>
+            <dd class="col-sm-10">
+                @Html.DisplayFor(model => model.KOTACABANG)
+            </dd>
+            <dt class="col-sm-2">
+                @Html.DisplayNameFor(model => model.KODEZIPCABANG)
+            </dt>
+            <dd class="col-sm-10">
+                @Html.DisplayFor(model => model.KODEZIPCABANG)
+            </dd>
+            <dt class="col-sm-2">
+                @Html.DisplayNameFor(model => model.PICCABANG)
+            </dt>
+            <dd class="col-sm-10">
+                @Html.DisplayFor(model => model.PICCABANG)
+            </dd>
+            <dt class="col-sm-2">
+                @Html.DisplayNameFor(model => model.EMAILCABANG)
+            </dt>
+            <dd class="col-sm-10">
+                @Html.DisplayFor(model => model.EMAILCABANG)
+            </dd>
+            <dt class="col-sm-2">
+                @Html.DisplayNameFor(model => model.TELEPONCABANG)
+            </dt>
+            <dd class="col-sm-10">
+                @Html.DisplayFor(model => model.TELEPONCABANG)
+            </dd>
+            <dt class="col-sm-2">
+                @Html.DisplayNameFor(model => model.ISHEADOFFICE)
+            </dt>
+            <dd class="col-sm-10">
+                @Html.DisplayFor(model => model.ISHEADOFFICE)
+            </dd>
+        </dl>
+    </div>
+    <a asp-action="Index" class="btn btn-dark pull-left">Tutup</a>
+    <br />
+</div>

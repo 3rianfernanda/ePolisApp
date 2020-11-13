@@ -1,0 +1,61 @@
+﻿@*@model IEnumerable<Epolis.Models.Tpenutupan>*@
+@model IEnumerable<Epolis.Models.ViewModelPenutupan>
+@{
+    ViewData["Title"] = "Index";
+}
+<div class="app-page-title">
+    <div class="page-title-wrapper">
+        <div class="page-title-heading">
+            <div class="page-title-icon">
+                <i class="pe-7s-medal icon-gradient bg-tempting-azure"></i>
+            </div>
+        </div>
+        <div class="page-title-heading">LIST PENUTUPAN BARU</div>
+    </div>
+</div>
+<div class="main-card card col-12">
+    <div class="card-body">
+        <br />
+        <table style="width: 100%;" id="table" class="table table-bordered table-hover">
+            <thead>
+                <tr>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Tpenutupan.tnasabahID)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Tpenutupan.NOSKK)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Tpenutupan.NOPK)
+                    </th>
+                    <td style="color:white;font-weight:bold">
+                        Nama Kota
+                    </td>
+                    <th>Action</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model)
+                {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Tnasabah.NAMA)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Tpenutupan.NOSKK)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Tpenutupan.NOPK)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Tpenutupan.ORDERDARIKOTA)
+                    </td>s
+                    <td style="text-align:center">
+                        <a asp-action="Process" asp-route-id="@item.Tpenutupan.ID" data-toggle="tooltip" title="Order Penutupan" class="btn btn-secondary fas fa-microchip">Order Penutupan</a>
+                    </td>
+                </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</div>

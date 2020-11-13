@@ -1,0 +1,22 @@
+﻿
+table.dataTable {
+    background: #006677;
+    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+}
+.btn-detail, .btn-edit, .btn-delete, .btn-add, .btn-save, .btn-cancel {
+    background-color: #006677;
+    color: #fff;
+    border-color: #4cae4c;
+}
+table.dataTable > thead > tr:first-child th {
+    white-space: nowrap;
+    text-align: center;
+    color:white;
+}
+table.dataTable > tbody > tr td {
+    white-space: nowrap;
+    text-align: left;
+}
+form, h2, h4,h3 {
+    font-family :'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+}

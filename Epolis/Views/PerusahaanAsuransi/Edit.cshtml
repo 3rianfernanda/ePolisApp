@@ -1,0 +1,106 @@
+﻿@model Epolis.Models.Mperusahaanasuransi
+
+@{
+    ViewData["Title"] = "Edit";
+}
+
+<div class="app-page-title">
+    <div class="page-title-wrapper">
+        <div class="page-title-heading">
+            <div class="page-title-icon">
+                <i class="pe-7s-medal icon-gradient bg-tempting-azure"></i>
+            </div>
+        </div>
+        <div class="page-title-heading">UBAH DATA PERUSAHAAN ASURANSI</div>
+    </div>
+</div>
+<div class="main-card card col-12">
+    <div class="card-body">
+        <form asp-action="Edit" autocomplete="off">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input type="hidden" asp-for="ID" />
+            <div class="position-relative row form-group">
+                <label asp-for="KODEPERUSAHAAN" class="col-sm-2 col-form-label"></label>
+                <p style="color:red">*</p>
+                <div class="col-sm-9">
+                    <input asp-for="KODEPERUSAHAAN" class="form-control" />
+                    <span asp-validation-for="KODEPERUSAHAAN" class="text-danger"></span>
+                </div>
+            </div>
+            <div class="position-relative row form-group">
+                <label asp-for="NAMAPERUSAHAAN" class="col-sm-2 col-form-label"></label>
+                <p style="color:red">*</p>
+                <div class="col-sm-9">
+                    <input asp-for="NAMAPERUSAHAAN" class="form-control" />
+                    <span asp-validation-for="NAMAPERUSAHAAN" class="text-danger"></span>
+                </div>
+            </div>
+            <div class="position-relative row form-group">
+                <label asp-for="ALAMAT" class="col-sm-2 col-form-label"></label>
+                <p style="color: white">*</p>
+                <div class="col-sm-9">
+                    <input asp-for="ALAMAT" class="form-control" />
+                    <span asp-validation-for="ALAMAT" class="text-danger"></span>
+                </div>
+            </div>
+            <div class="position-relative row form-group">
+                <label asp-for="NOTLP" class="col-sm-2 col-form-label"></label>
+                <p style="color: white">*</p>
+                <div class="col-sm-9">
+                    <input asp-for="NOTLP" class="form-control" />
+                    <span asp-validation-for="NOTLP" class="text-danger"></span>
+                </div>
+            </div>
+            <div class="position-relative row form-group">
+                <label asp-for="NOFAX" class="col-sm-2 col-form-label"></label>
+                <p style="color: white">*</p>
+                <div class="col-sm-9">
+                    <input asp-for="NOFAX" class="form-control" />
+                    <span asp-validation-for="NOFAX" class="text-danger"></span>
+                </div>
+            </div>
+            <div class="position-relative row form-group">
+                <label asp-for="CONTACTPERSON" class="col-sm-2 col-form-label"></label>
+                <p style="color: white">*</p>
+                <div class="col-sm-9">
+                    <input asp-for="CONTACTPERSON" class="form-control" />
+                    <span asp-validation-for="CONTACTPERSON" class="text-danger"></span>
+                </div>
+            </div>
+            <div class="position-relative row form-group">
+                <label asp-for="EMAIL" class="col-sm-2 col-form-label"></label>
+                <p style="color: white">*</p>
+                <div class="col-sm-9">
+                    <input asp-for="EMAIL" class="form-control" />
+                    <span asp-validation-for="EMAIL" class="text-danger"></span>
+                </div>
+            </div>
+            <div class="position-relative row form-group" hidden>
+                <label asp-for="UPDATEDTIME" class="col-sm-2 col-form-label"></label>
+                <p style="color:red"> </p>
+                <div class="col-sm-9">
+                    <input asp-for="UPDATEDTIME" class="form-control" value="@DateTime.Now" />
+                    <span asp-validation-for="UPDATEDTIME" class="text-danger"></span>
+                </div>
+            </div>
+            <div class="position-relative row form-group" hidden>
+                <label asp-for="UPDATEDBYID" class="col-sm-2 col-form-label"></label>
+                <p style="color:red"> </p>
+                <div class="col-sm-9">
+                    <input asp-for="UPDATEDBYID" class="form-control" />
+                    <span asp-validation-for="UPDATEDBYID" class="text-danger"></span>
+                </div>
+            </div>
+            <div class="position-relative row form-check">
+                <div class="col-sm-9 offset-sm-2">
+                    <button class="btn btn-save pull-right">Simpan</button>
+                </div>
+            </div>
+        </form>
+        <a asp-action="Index" class="btn btn-dark pull-left">Kembali</a>
+    </div>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

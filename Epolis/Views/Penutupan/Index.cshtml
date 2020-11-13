@@ -1,0 +1,76 @@
+﻿@*@model IEnumerable<Epolis.Models.Tpenutupan>*@
+@model IEnumerable<Epolis.Models.ViewModelPenutupan>
+@{
+    ViewData["Title"] = "Index";
+}
+<div class="app-page-title">
+    <div class="page-title-wrapper">
+        <div class="page-title-heading">
+            <div class="page-title-icon">
+                <i class="pe-7s-medal icon-gradient bg-tempting-azure"></i>
+            </div>
+        </div>
+        <div class="page-title-heading">LIST PENUTUPAN</div>
+    </div>
+</div>
+<div class="main-card card col-12">
+    <div class="card-body">
+        <div>
+            <a asp-action="Create" class="btn-lg btn-add fa fa-plus-square" data-toggle="tooltip" title="Tambah Baru"></a>
+        </div>
+        <br />
+        <table style="width: 100%;" id="table" class="table table-bordered table-hover">
+            <thead>
+                <tr>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Tpenutupan.tnasabahID)
+                    </th>
+                    <th>
+                        Jenis Asuransi
+                    </th>
+                    <th >
+                        No. Order Penutupan
+                    </th>
+                    <td style="color:white">
+                        Nama Kota
+                    </td>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Tpenutupan.TGLINPUT)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Tpenutupan.STATUS)
+                    </th>
+                    <th>Action</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Tnasabah.NAMA)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Tpenutupan.JENISPENUTUPAN)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Tpenutupan.NOREGPENUTUPAN)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Tpenutupan.ORDERDARIKOTA)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Tpenutupan.TGLINPUT)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Mlookup.VALUE)
+                        </td>
+                        <td style="text-align:center">
+                            <a asp-action="Details" asp-route-id="@item.Tpenutupan.ID" data-toggle="tooltip" title="Lihat Detail" class="btn btn-detail fa fa-eye">Detail</a>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</div>

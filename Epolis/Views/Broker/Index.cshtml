@@ -1,0 +1,105 @@
+﻿@model IEnumerable<Epolis.Models.Mbroker>
+
+@{
+    ViewData["Title"] = "Index";
+}
+<div class="app-page-title">
+    <div class="page-title-wrapper">
+        <div class="page-title-heading">
+            <div class="page-title-icon">
+                <i class="pe-7s-medal icon-gradient bg-tempting-azure"></i>
+            </div>
+        </div>
+        <div class="page-title-heading">DAFTAR BROKER</div>
+    </div>
+</div>
+
+<div class="main-card card col-12">
+    <div class="card-body col-11">
+        <div>
+            <a asp-action="Create" class="btn-lg btn-add fa fa-plus-square" data-toggle="tooltip" title="Tambah Baru"></a>
+        </div>
+        <br />
+        @*<table id="tablebroker" class="table table-bordered table-hover" style="width:100%; cursor:pointer;">
+            <thead>
+                <tr>
+                    <th>NO</th>
+                    <th> Kode Broker</th>
+                    <th> Nama Broker</th>
+                    <th>Contact Person</th>
+                    <th>Email </th>
+                    <th></th>
+                    <th></th>
+                    <th></th>
+                    <th></th>
+                    <th></th>
+                    <th></th>
+                    <th></th>
+                    <th></th>
+                    <th></th>
+                    <th></th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody></tbody>
+        </table>*@
+        <table id="table" class="table table-bordered table-hover" style="width:100%;cursor:pointer;">
+                <thead>
+                    <tr>
+                        <th>NO</th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.KODEBROKER)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.NAMABROKER)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.CONTACTPERSON)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.EMAIL)
+                        </th>
+                        <th>Action</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @{
+                        int sno = 0;
+                        List<Mbroker> listMbroker = (List<Mbroker>)ViewData["listMbroker"];
+                        if (listMbroker != null)
+                        {
+                            foreach (var item in listMbroker)
+                            {
+                                <tr>
+                                    <td style="text-align:center">
+                                        @{ sno++; }
+                                        @sno
+                                    </td>
+                                    <td id="KODEBROKER">
+                                        @Html.DisplayFor(modelItem => item.KODEBROKER)
+                                    </td>
+                                    <td id="NAMABROKER">
+                                        @Html.DisplayFor(modelItem => item.NAMABROKER)
+                                    </td>
+                                    <td id="CONTACTPERSON">
+                                        @Html.DisplayFor(modelItem => item.CONTACTPERSON)
+                                    </td>
+                                    <td id="EMAIL">
+                                        @Html.DisplayFor(modelItem => item.EMAIL)
+                                    </td>
+                                    <td style="text-align:center">
+                                        <a asp-action="Edit" asp-route-id="@item.ID" data-toggle="tooltip" title="Edit" class="btn btn-edit fa fa-edit" id=""></a> |
+                                        <a asp-action="Details" asp-route-id="@item.ID" data-toggle="tooltip" title="Lihat Detail" class="btn btn-detail fa fa-eye"></a> |
+                                        <a asp-action="Delete" asp-route-id="@item.ID" data-toggle="tooltip" title="Hapus" class="btn btn-delete fa fa-trash" onclick="return confirm('Hapus data ini?')"></a>
+                                    </td>
+                                </tr>
+                            }
+                        }
+                    }
+                </tbody>
+            </table>
+    </div>
+</div>
+@section Scripts{ 
+<script src="~/js/TblBroker.js" asp-append-version="true"></script>
+}
